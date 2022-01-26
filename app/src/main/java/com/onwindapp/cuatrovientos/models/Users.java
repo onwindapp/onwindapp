@@ -131,4 +131,19 @@ public class Users extends RealmObject {
     public void baner(){
         this.forgivenessdate = "";
     }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Users users = (Users) o;
+
+        return mail.equals(users.mail);
+    }
+
+    @Override
+    public int hashCode() {
+        return mail.hashCode();
+    }
 }
