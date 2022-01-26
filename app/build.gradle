@@ -1,7 +1,5 @@
-plugins {
-    id 'com.android.application'
-    id 'realm-android'
-}
+apply plugin: 'com.android.application'
+apply plugin: 'realm-android'
 
 android {
     compileSdk 31
