@@ -16,20 +16,28 @@ public class Users extends RealmObject {
     @Required
     private String password;
     @Required
+    private String mail;
     private String telephone;
     private float punctuation;
     private float CO2points;
+    private boolean ban;
+    private int nbans;
+    private String forgivenessdate;
 
     public Users() {}
 
-    public Users(String name, String surname, String password, String telephone) {
+    public Users(String name, String surname, String password, String mail, String telephone) {
         this.id = OnWindApp.userId.incrementAndGet();
         this.name = name;
         this.surname = surname;
         this.password = password;
+        this.mail = mail;
         this.telephone = telephone;
         this.punctuation = 0;
         this.CO2points = 0;
+        this.ban = false;
+        this.nbans = 0;
+        this.forgivenessdate = "";
     }
 
     public int getId() {
@@ -64,6 +72,14 @@ public class Users extends RealmObject {
         this.password = password;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public String getTelephone() {
         return telephone;
     }
@@ -86,5 +102,33 @@ public class Users extends RealmObject {
 
     public void setCO2points(float CO2points) {
         this.CO2points = CO2points;
+    }
+
+    public boolean isBan() {
+        return ban;
+    }
+
+    public void setBan(boolean ban) {
+        this.ban = ban;
+    }
+
+    public int getNbans() {
+        return nbans;
+    }
+
+    public void setNbans(int nbans) {
+        this.nbans = nbans;
+    }
+
+    public String getForgivenessdate() {
+        return forgivenessdate;
+    }
+
+    public void setForgivenessdate(String forgivenessdate) {
+        this.forgivenessdate = forgivenessdate;
+    }
+
+    public void baner(){
+        this.forgivenessdate = "";
     }
 }
