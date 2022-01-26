@@ -2,6 +2,7 @@ package com.onwindapp.cuatrovientos.app;
 
 import android.app.Application;
 
+import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 
 import java.util.concurrent.atomic.AtomicInteger;
@@ -13,12 +14,14 @@ import io.realm.RealmResults;
 
 public class OnWindApp extends Application {
     public static AtomicInteger userId = new AtomicInteger();
+    public static AtomicInteger RideId = new AtomicInteger();
     @Override
     public void onCreate() {
         super.onCreate();
         setUpRealmConfig();
         Realm realm = Realm.getDefaultInstance();
         userId = getIdByTable(realm, Users.class);
+        RideId = getIdByTable(realm, Ride.class);
         realm.close();
     }
     private void setUpRealmConfig(){
