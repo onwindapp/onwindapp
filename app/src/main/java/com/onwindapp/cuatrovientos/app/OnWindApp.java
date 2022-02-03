@@ -29,6 +29,7 @@ public class OnWindApp extends Application {
         RealmConfiguration config = new RealmConfiguration
                 .Builder()
                 .deleteRealmIfMigrationNeeded()
+                .allowQueriesOnUiThread(true)
                 .build();
         Realm.setDefaultConfiguration(config);
     }

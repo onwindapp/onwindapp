@@ -9,6 +9,8 @@ import io.realm.annotations.Required;
 
 public class Ride extends RealmObject {
 
+    public Ride () {}
+
     public Ride(RidesTypes ridesTypes, String name, RealmList<Integer> point, int availablePlaces, String description, int meetHour, Users driver, RealmList<Users> usersJoined) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
@@ -36,16 +38,13 @@ public class Ride extends RealmObject {
     @Required
     private RealmList<Integer> point;
 
-    @Required
     private int availablePlaces;
 
     @Required
     private String description;
 
-    @Required
     private int meetHour;
 
-    @Required
     private Users driver;
 
     private RealmList<Users> usersJoined;
