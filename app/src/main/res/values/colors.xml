@@ -4,4 +4,8 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="onwind_blue">#009DD3</color>
+    <color name="red">#ff0000</color>
+    <color name="blue">#0077ff</color>
+    <color name="orange">#ff6f00</color>
+    <color name="green">#1aff00</color>
 </resources>

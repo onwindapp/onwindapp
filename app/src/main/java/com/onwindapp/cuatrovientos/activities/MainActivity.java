@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
+import com.onwindapp.cuatrovientos.fragments.UserTripsFragment;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
@@ -53,6 +55,8 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        UserTripsFragment detailsFragment = (UserTripsFragment) getSupportFragmentManager().findFragmentById(R.id.);
+        detailsFragment.renderData();
 
 
     }

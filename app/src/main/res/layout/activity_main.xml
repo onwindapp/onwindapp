@@ -6,6 +6,15 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
+    <fragment
+        android:id="@+id/dataFragment"
+        android:name="com.onwindapp.cuatrovientos.fragments.UserTripsFragment"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="40"
+        tools:layout="@layout/fragment_data"/>
+
+
     <com.google.android.material.tabs.TabLayout
         android:id="@+id/tab_layout"
         android:layout_width="match_parent"
