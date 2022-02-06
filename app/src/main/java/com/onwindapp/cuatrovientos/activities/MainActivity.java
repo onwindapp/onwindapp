@@ -6,6 +6,7 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -52,5 +53,12 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.main, menu);
+
+        return super.onCreateOptionsMenu(menu);
     }
 }
