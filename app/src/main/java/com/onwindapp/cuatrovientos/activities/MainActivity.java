@@ -6,6 +6,8 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
@@ -20,16 +22,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
-
-        tablayout.addTab(tablayout.newTab().setText("Mis viajes"));
-        tablayout.addTab(tablayout.newTab().setText("Viajes disponibles"));
 
         tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
@@ -54,10 +52,5 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
-
-        UserTripsFragment detailsFragment = (UserTripsFragment) getSupportFragmentManager().findFragmentById(R.id.);
-        detailsFragment.renderData();
-
-
     }
 }
