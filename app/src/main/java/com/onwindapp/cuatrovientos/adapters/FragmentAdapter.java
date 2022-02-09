@@ -19,9 +19,9 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new TripsAvailableFragment();
-            case 1:
                 return new UserTripsFragment();
+            case 1:
+                return new TripsAvailableFragment();
         }
         return new TripsAvailableFragment();
     }
