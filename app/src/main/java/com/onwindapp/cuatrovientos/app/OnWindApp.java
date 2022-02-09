@@ -29,10 +29,11 @@ public class OnWindApp extends Application {
         RealmConfiguration config = new RealmConfiguration
                 .Builder()
                 .deleteRealmIfMigrationNeeded()
-                .allowQueriesOnUiThread(true)
+                .allowWritesOnUiThread(true)
                 .build();
         Realm.setDefaultConfiguration(config);
     }
+
     private <T extends RealmObject> AtomicInteger getIdByTable(Realm realm, Class<T> anyClass){
         RealmResults<T> results = realm.where(anyClass).findAll();
 

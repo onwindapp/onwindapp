@@ -15,18 +15,38 @@ import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
 import com.onwindapp.cuatrovientos.fragments.UserTripsFragment;
+import com.onwindapp.cuatrovientos.models.Ride;
+import com.onwindapp.cuatrovientos.models.RidesTypes;
+import com.onwindapp.cuatrovientos.models.Users;
+
+import java.util.Arrays;
+import java.util.List;
+
+import io.realm.Realm;
+import io.realm.RealmList;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
     ViewPager2 pager;
     FragmentAdapter adapter;
+    Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
-
+        realm = Realm.getDefaultInstance();
+//        realm.executeTransaction(new Realm.Transaction() {
+//            @Override
+//            public void execute(Realm realm) {
+//                RealmList<Double> point = new RealmList<Double>();
+//                point.add(42.823967);
+//                point.add(-1.660624);
+//                Users driver = new Users("iker", "l", "123", "12@gmail.com", "123");
+//                realm.insert(new Ride(RidesTypes.Ida, "pr", point, 3, "des", 13, driver ));
+//            }
+//        });
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
@@ -54,6 +74,10 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
+
+        Intent intent = new Intent(this, InfoRouteActivity.class);
+        intent.putExtra("id", 1);
+        startActivity(intent);
     }
 
     @Override
