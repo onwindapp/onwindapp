@@ -36,7 +36,7 @@ public class Ride extends RealmObject {
     Punto de salida o llegada del viaje (dependiendo del tipo de viaje)
      */
     @Required
-    private RealmList<Integer> point;
+    private RealmList<Double> point;
 
     private int availablePlaces;
 
