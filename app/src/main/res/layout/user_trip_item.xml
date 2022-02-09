@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android" xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:id="@+id/tripCardItem"
+    android:id="@+id/userTripCardItem"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:animateLayoutChanges="true"
@@ -20,7 +20,7 @@
             android:padding="6dp">
 
             <LinearLayout
-                android:id="@+id/linearLayout"
+                android:id="@+id/linearLayoutUT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
@@ -28,7 +28,7 @@
                 android:layout_marginTop="2dp"
                 android:orientation="vertical">
                 <TextView
-                    android:id="@+id/driverName"
+                    android:id="@+id/driverNameUT"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginStart="10dp"
@@ -37,16 +37,16 @@
                     android:textSize="24sp"
                     android:textStyle="bold"/>
                 <TextView
-                    android:id="@+id/availableSpaces"
+                    android:id="@+id/date"
                     android:layout_width="match_parent"
                     android:layout_marginStart="10dp"
                     android:layout_height="wrap_content"
-                    android:text="4 plazas"
+                    android:text="12/03/2022 12:34"
                     android:textSize="18sp"/>
             </LinearLayout>
 
             <TextView
-                android:id="@+id/tripType"
+                android:id="@+id/tripTypeUT"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentEnd="true"

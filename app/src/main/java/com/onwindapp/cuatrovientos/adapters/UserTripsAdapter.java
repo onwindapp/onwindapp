@@ -12,8 +12,10 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.TripsTesting;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.GregorianCalendar;
 
-public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHolder> {
+public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.UserTripsViewHolder> {
     private ArrayList<TripsTesting> trips;
     private OnItemClickListener mListener;
     Context context;
@@ -26,14 +28,14 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHol
         mListener = listener;
     }
 
-    public static class TripsViewHolder extends RecyclerView.ViewHolder {
-        public TextView username, spacesAvailable, tripType;
+    public static class UserTripsViewHolder extends RecyclerView.ViewHolder {
+        public TextView username, date, tripType;
 
-        public TripsViewHolder(View itemView, final OnItemClickListener listener) {
+        public UserTripsViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
-            username = (TextView) itemView.findViewById(R.id.driverName);
-            spacesAvailable = (TextView) itemView.findViewById(R.id.availableSpaces);
-            tripType = (TextView) itemView.findViewById(R.id.tripType);
+            username = (TextView) itemView.findViewById(R.id.driverNameUT);
+            date = (TextView) itemView.findViewById(R.id.date);
+            tripType = (TextView) itemView.findViewById(R.id.tripTypeUT);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -48,28 +50,36 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHol
         }
     }
 
-    public TripsAdapter(Context context, ArrayList<TripsTesting> trips) {
+    public UserTripsAdapter(Context context, ArrayList<TripsTesting> trips) {
         this.context = context;
         this.trips = trips;
     }
 
 
     @Override
-    public TripsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
-        TripsViewHolder evh = new TripsViewHolder(v, mListener);
+    public UserTripsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_trip_item, parent, false);
+        UserTripsViewHolder evh = new UserTripsViewHolder(v, mListener);
         return evh;
     }
 
     @Override
-    public void onBindViewHolder(TripsViewHolder holder, int position) {
+    public void onBindViewHolder(UserTripsViewHolder holder, int position) {
         TripsTesting currentTrip = trips.get(position);
 
         holder.username.setText(currentTrip.getUsername());
-        holder.spacesAvailable.setText(currentTrip.getSlots()+" Plazas");
+        holder.date.setText(getRandomDate());
         holder.tripType.setText(currentTrip.getTripType());
     }
 
+    private String getRandomDate(){
+        long time = System.currentTimeMillis();
+        Date dat = new Date(time);
+        GregorianCalendar gc = new GregorianCalendar();
+        gc.setTime(dat);
+        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm");
+        return format.format(gc.getTime());
+    }
     @Override
     public int getItemCount() {
         return trips.size();

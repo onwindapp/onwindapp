@@ -8,9 +8,11 @@
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/drawable-v24/person_icon.xml" value="0.143" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/activity_login.xml" value="0.176" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/activity_main.xml" value="0.2" />
+        <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/activity_ranking.xml" value="0.23645833333333333" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/fragment_trips_available.xml" value="0.23645833333333333" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/fragment_user_trips.xml" value="0.23645833333333333" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/trip_item.xml" value="0.21510416666666668" />
+        <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/layout/user_trip_item.xml" value="0.20052083333333334" />
         <entry key="..\:/dam_workspaces/onwindapp/app/src/main/res/menu/main.xml" value="0.15572916666666667" />
       </map>
     </option>

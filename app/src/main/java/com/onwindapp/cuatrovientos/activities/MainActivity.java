@@ -64,8 +64,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
-        int id = item.getItemId();
-        if (id == R.id.Ranking){
+        //Left this condition in case we want to add more items to the menu
+        if (item.getItemId() == R.id.Ranking){
             Intent intent = new Intent(this, RankingActivity.class);
             startActivity(intent);
         }
