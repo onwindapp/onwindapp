@@ -12,18 +12,22 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
-
+import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
     ViewPager2 pager;
     FragmentAdapter adapter;
-
+    RealmResults<Users> realmUsers;
+    RealmResults<Ride> realmRides;
+    DummyDataGenerator ddg;
     Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,7 +35,22 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
+        ddg = new DummyDataGenerator();
+
         realm = Realm.getDefaultInstance();
+        realmUsers = realm.where(Users.class).findAll();
+        realmRides = realm.where(Ride.class).findAll();
+        if (realmUsers.size() == 0){
+            realm.beginTransaction();
+            realm.copyToRealm(ddg.createUsers());
+            realm.commitTransaction();
+        }
+        if (realmRides.size() == 0){
+            realm.beginTransaction();
+            realm.copyToRealm(ddg.createUsers());
+            realm.commitTransaction();
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
@@ -59,10 +78,6 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
-
-        Intent intent = new Intent(this, InfoRouteActivity.class);
-        intent.putExtra("id", 1);
-        startActivity(intent);
     }
 
     @Override
