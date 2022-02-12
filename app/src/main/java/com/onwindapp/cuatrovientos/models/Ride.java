@@ -11,7 +11,7 @@ public class Ride extends RealmObject {
 
     public Ride () {}
 
-    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, int meetHour, Users driver, RealmList<Users> usersJoined) {
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String meetHour, Users driver, RealmList<Users> usersJoined) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
         this.name = name;
@@ -23,7 +23,7 @@ public class Ride extends RealmObject {
         this.usersJoined = usersJoined;
     }
 
-    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, int meetHour, Users driver) {
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String meetHour, Users driver) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
         this.name = name;
@@ -55,7 +55,7 @@ public class Ride extends RealmObject {
     @Required
     private String description;
 
-    private int meetHour;
+    private String meetHour;
 
     private Users driver;
 
@@ -102,11 +102,11 @@ public class Ride extends RealmObject {
         this.description = description;
     }
 
-    public int getMeetHour() {
+    public String getMeetHour() {
         return meetHour;
     }
 
-    public void setMeetHour(int meetHour) {
+    public void setMeetHour(String meetHour) {
         this.meetHour = meetHour;
     }
 

@@ -8,27 +8,22 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
-import com.onwindapp.cuatrovientos.fragments.UserTripsFragment;
-import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.RidesTypes;
+
 import com.onwindapp.cuatrovientos.models.Users;
 
-import java.util.Arrays;
-import java.util.List;
+import java.util.ArrayList;
 
 import io.realm.Realm;
-import io.realm.RealmList;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
     ViewPager2 pager;
     FragmentAdapter adapter;
+
     Realm realm;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +32,6 @@ public class MainActivity extends AppCompatActivity {
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
         realm = Realm.getDefaultInstance();
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmList<Double> point = new RealmList<Double>();
-//                point.add(42.823967);
-//                point.add(-1.660624);
-//                Users driver = new Users("iker", "l", "123", "12@gmail.com", "123");
-//                realm.insert(new Ride(RidesTypes.Ida, "pr", point, 3, "des", 13, driver ));
-//            }
-//        });
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
@@ -94,5 +79,20 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return true;
+    }
+
+    private ArrayList<Users> createUsers(){
+        ArrayList<Users> users = new ArrayList<Users>();
+        Users usr1 = new Users("Miguel", "Puerta", "test", "mpuerta@onwind.app", "12345678");
+        users.add(usr1);
+        Users usr2 = new Users("Juan", "Gonzalez", "test", "juan@onwind.app", "12345678");
+        users.add(usr2);
+        Users usr3 = new Users("Josu", "Ramirez", "test", "josu@onwind.app", "12345678");
+        users.add(usr3);
+        Users usr4 = new Users("Antonio", "De la Luz", "test", "antonio@onwind.app", "12345678");
+        users.add(usr4);
+        Users usr5 = new Users("Roger", "Altamira", "test", "roger@onwind.app", "12345678");
+        users.add(usr5);
+        return users;
     }
 }

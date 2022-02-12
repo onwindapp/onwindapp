@@ -20,16 +20,24 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.TripsAdapter;
 import com.onwindapp.cuatrovientos.adapters.UserTripsAdapter;
 import com.onwindapp.cuatrovientos.models.TripsTesting;
+import com.onwindapp.cuatrovientos.models.Users;
 
 import java.util.ArrayList;
 
+import io.realm.Realm;
+import io.realm.RealmResults;
+
 public class UserTripsFragment extends Fragment {
-    private ArrayList<TripsTesting> trips;
+    ArrayList<TripsTesting> trips;
+    RealmResults<Users> realmUsers;
+    Realm realm;
     public UserTripsFragment() {}
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_trips, container, false);
+        realm = Realm.getDefaultInstance();
+        realmUsers = realm.where(Users.class).findAll();
         UserTripsAdapter userTripsAdapter = new UserTripsAdapter(getActivity(), load());
         RecyclerView recyclerView = view.findViewById(R.id.userTripsRecycler);
         recyclerView.setHasFixedSize(true);
