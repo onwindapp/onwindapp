@@ -11,7 +11,7 @@ public class Ride extends RealmObject {
 
     public Ride () {}
 
-    public Ride(RidesTypes ridesTypes, String name, RealmList<Integer> point, int availablePlaces, String description, int meetHour, Users driver, RealmList<Users> usersJoined) {
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, int meetHour, Users driver, RealmList<Users> usersJoined) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
         this.name = name;
@@ -21,6 +21,18 @@ public class Ride extends RealmObject {
         this.meetHour = meetHour;
         this.driver = driver;
         this.usersJoined = usersJoined;
+    }
+
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, int meetHour, Users driver) {
+        this.id = OnWindApp.RideId.incrementAndGet();
+        this.ridesTypes = this.saveRideType(ridesTypes);
+        this.name = name;
+        this.point = point;
+        this.availablePlaces = availablePlaces;
+        this.description = description;
+        this.meetHour = meetHour;
+        this.driver = driver;
+        this.usersJoined = null;
     }
 
     @PrimaryKey
@@ -36,7 +48,7 @@ public class Ride extends RealmObject {
     Punto de salida o llegada del viaje (dependiendo del tipo de viaje)
      */
     @Required
-    private RealmList<Integer> point;
+    private RealmList<Double> point;
 
     private int availablePlaces;
 
@@ -66,11 +78,11 @@ public class Ride extends RealmObject {
         this.name = name;
     }
 
-    public RealmList<Integer> getPoint() {
+    public RealmList<Double> getPoint() {
         return point;
     }
 
-    public void setPoint(RealmList<Integer> point) {
+    public void setPoint(RealmList<Double> point) {
         this.point = point;
     }
 
