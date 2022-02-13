@@ -10,14 +10,12 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.TripsTesting;
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.List;
 
-public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.UserTripsViewHolder> {
+public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.UserTripsViewHolder> {
     private List<Ride> trips;
     private OnItemClickListener mListener;
     Context context;
@@ -52,7 +50,7 @@ public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.User
         }
     }
 
-    public UserTripsAdapter(Context context, List<Ride> trips) {
+    public UserRidesAdapter(Context context, List<Ride> trips) {
         this.context = context;
         this.trips = trips;
     }

@@ -11,21 +11,17 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.onwindapp.cuatrovientos.R;
-import com.onwindapp.cuatrovientos.adapters.TripsAdapter;
+import com.onwindapp.cuatrovientos.adapters.RidesAdapter;
 import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.TripsTesting;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class TripsAvailableFragment extends Fragment {
+public class RidesAvailableFragment extends Fragment {
     //private ArrayList<TripsTesting> trips;
     RealmResults<Ride> realmRides;
     Realm realm;
-    public TripsAvailableFragment() {
+    public RidesAvailableFragment() {
         // Required empty public constructor
     }
 
@@ -36,12 +32,12 @@ public class TripsAvailableFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         realmRides = realm.where(Ride.class).findAll();
 
-        TripsAdapter tripsAdapter = new TripsAdapter(getActivity(), realmRides);
+        RidesAdapter ridesAdapter = new RidesAdapter(getActivity(), realmRides);
 
         RecyclerView recyclerView = view.findViewById(R.id.tripsAvailableRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(tripsAdapter);
+        recyclerView.setAdapter(ridesAdapter);
         return view;
     }
 }

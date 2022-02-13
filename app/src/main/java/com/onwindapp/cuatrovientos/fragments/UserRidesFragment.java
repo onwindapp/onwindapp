@@ -1,14 +1,9 @@
 package com.onwindapp.cuatrovientos.fragments;
 
-import android.app.Activity;
-import android.content.Context;
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
-import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -16,29 +11,25 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
-import com.onwindapp.cuatrovientos.adapters.TripsAdapter;
-import com.onwindapp.cuatrovientos.adapters.UserTripsAdapter;
+import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
 import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.TripsTesting;
 import com.onwindapp.cuatrovientos.models.Users;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class UserTripsFragment extends Fragment {
+public class UserRidesFragment extends Fragment {
     List<Ride> userRides;
     RealmResults<Ride> rides;
     Realm realm;
     Users loggedUser;
-    public UserTripsFragment() {}
+    public UserRidesFragment() {}
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
@@ -53,11 +44,11 @@ public class UserTripsFragment extends Fragment {
 
         if (loggedUser != null) userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(loggedUser)).collect(Collectors.toList());
 
-        UserTripsAdapter userTripsAdapter = new UserTripsAdapter(getActivity(), userRides);
+        UserRidesAdapter userRidesAdapter = new UserRidesAdapter(getActivity(), userRides);
         RecyclerView recyclerView = view.findViewById(R.id.userTripsRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(userTripsAdapter);
+        recyclerView.setAdapter(userRidesAdapter);
         return view;
     }
 }

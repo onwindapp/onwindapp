@@ -10,12 +10,10 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.TripsTesting;
 
-import java.util.ArrayList;
 import java.util.List;
 
-public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHolder> {
+public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHolder> {
     private List<Ride> trips;
     private OnItemClickListener mListener;
     Context context;
@@ -50,7 +48,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHol
         }
     }
 
-    public TripsAdapter(Context context, List<Ride> trips) {
+    public RidesAdapter(Context context, List<Ride> trips) {
         this.context = context;
         this.trips = trips;
     }
