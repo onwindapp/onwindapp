@@ -16,9 +16,6 @@ import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import io.realm.Realm;
 import io.realm.RealmResults;
 
@@ -31,7 +28,7 @@ public class MainActivity extends AppCompatActivity {
     DummyDataGenerator ddg;
     Realm realm;
     Boolean realmCleanMode = Boolean.FALSE;
-    String loggedUserEmail = "mpuerta@onwind.app";
+    String loggedUserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,6 +36,8 @@ public class MainActivity extends AppCompatActivity {
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
         ddg = new DummyDataGenerator();
+
+        loggedUserEmail = "mpuerta@onwind.app";
 
         realm = Realm.getDefaultInstance();
         if (realmCleanMode){
@@ -59,22 +58,6 @@ public class MainActivity extends AppCompatActivity {
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
         }
-        /*
-        Users loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
-        Ride updateRide = realm.where(Ride.class).findFirst();
-        realm.beginTransaction();
-        updateRide.addUserToRide(loggedUser);
-        realm.copyToRealmOrUpdate(updateRide);
-        realm.commitTransaction();
-
-        Users loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
-        Ride updateRide = realm.where(Ride.class).equalTo("name", "Burlada").findFirst();
-        realm.beginTransaction();
-        updateRide.addUserToRide(loggedUser);
-        realm.copyToRealmOrUpdate(updateRide);
-        realm.commitTransaction();*/
-
-        //List<Users> usersInsideRide = realmRides.get(0).getUsersJoined();
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());

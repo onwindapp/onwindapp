@@ -46,21 +46,23 @@ public class UserRidesFragment extends Fragment {
 
         if (loggedUser != null) userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(loggedUser)).collect(Collectors.toList());
 
-        UserRidesAdapter userRidesAdapter = new UserRidesAdapter(getActivity(), userRides);
-        RecyclerView recyclerView = view.findViewById(R.id.userTripsRecycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(userRidesAdapter);
+        if (userRides != null){
+            UserRidesAdapter userRidesAdapter = new UserRidesAdapter(getActivity(), userRides);
+            RecyclerView recyclerView = view.findViewById(R.id.userTripsRecycler);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(userRidesAdapter);
 
-        userRidesAdapter.setOnItemClickListener(new UserRidesAdapter.OnItemClickListener(){
-            @Override
-            public void onItemClick(int position) {
-                Intent intentV = new Intent(getActivity(), RideDetailsActivity.class);
-                intentV.putExtra("rideName", userRides.get(position).getName());
-                startActivity(intentV);
-            }
-        });
-
+            userRidesAdapter.setOnItemClickListener(new UserRidesAdapter.OnItemClickListener(){
+                @Override
+                public void onItemClick(int position) {
+                    Intent intentV = new Intent(getActivity(), RideDetailsActivity.class);
+                    int id = userRides.get(position).getId();
+                    intentV.putExtra("rideInfo", Integer.toString(userRides.get(position).getId()) +":u");
+                    startActivity(intentV);
+                }
+            });
+        }
         return view;
     }
 }

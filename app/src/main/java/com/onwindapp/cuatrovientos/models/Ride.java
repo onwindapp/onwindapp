@@ -68,7 +68,9 @@ public class Ride extends RealmObject {
     public void removeUserFromRide(Users user){
         if (usersJoined.contains(user)) usersJoined.remove(user);
     }
-
+    public int getId() {
+        return this.id;
+    }
     public RidesTypes getRideType() {
         return RidesTypes.valueOf(ridesTypes);
     }

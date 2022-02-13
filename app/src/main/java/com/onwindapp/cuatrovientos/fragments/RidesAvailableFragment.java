@@ -1,5 +1,6 @@
 package com.onwindapp.cuatrovientos.fragments;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -11,7 +12,9 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.onwindapp.cuatrovientos.R;
+import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
 import com.onwindapp.cuatrovientos.adapters.RidesAdapter;
+import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
 import com.onwindapp.cuatrovientos.models.Ride;
 
 import io.realm.Realm;
@@ -32,12 +35,25 @@ public class RidesAvailableFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         realmRides = realm.where(Ride.class).findAll();
 
-        RidesAdapter ridesAdapter = new RidesAdapter(getActivity(), realmRides);
+        if (realmRides != null){
+            RidesAdapter ridesAdapter = new RidesAdapter(getActivity(), realmRides);
+            RecyclerView recyclerView = view.findViewById(R.id.tripsAvailableRecycler);
+            recyclerView.setHasFixedSize(true);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+            recyclerView.setAdapter(ridesAdapter);
 
-        RecyclerView recyclerView = view.findViewById(R.id.tripsAvailableRecycler);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(ridesAdapter);
+            ridesAdapter.setOnItemClickListener(new RidesAdapter.OnItemClickListener(){
+                @Override
+                public void onItemClick(int position) {
+                    Intent intentV = new Intent(getActivity(), RideDetailsActivity.class);
+                    int id = realmRides.get(position).getId();
+                    intentV.putExtra("rideInfo", Integer.toString(realmRides.get(position).getId()) +":g");
+                    startActivity(intentV);
+                }
+            });
+        }
+
+
         return view;
     }
 }

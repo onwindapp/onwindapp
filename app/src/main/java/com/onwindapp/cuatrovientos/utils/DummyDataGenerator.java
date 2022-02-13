@@ -19,7 +19,9 @@ public class DummyDataGenerator {
         RealmList<Double> cords1 = new RealmList<Double>();
         cords1.add(42.788515369171954);
         cords1.add(-1.6926605055655837);
-        Ride rd1 = new Ride(RidesTypes.Ida, "Zizur", cords1, 4, "Desde Zizur", "7:45", realmUsers.get(2));
+        RealmList<Users> usersJoined1 = new RealmList<Users>();
+        usersJoined1.add(realmUsers.get(0));
+        Ride rd1 = new Ride(RidesTypes.Ida, "Zizur", cords1, 4, "Desde Zizur", "7:45", realmUsers.get(2), usersJoined1);
         rides.add(rd1);
 
         RealmList<Double> cords2 = new RealmList<Double>();
@@ -37,7 +39,9 @@ public class DummyDataGenerator {
         RealmList<Double> cords4 = new RealmList<Double>();
         cords4.add(42.80148564798235);
         cords4.add(-1.6895813295148396);
-        Ride rd4 = new Ride(RidesTypes.Ida, "Barañain", cords1, 1, "Desde Barañain", "8:00", realmUsers.get(4));
+        RealmList<Users> usersJoined2 = new RealmList<Users>();
+        usersJoined2.add(realmUsers.get(0));
+        Ride rd4 = new Ride(RidesTypes.Ida, "Barañain", cords1, 1, "Desde Barañain", "14:30", realmUsers.get(4), usersJoined2);
         rides.add(rd4);
 
         return rides;

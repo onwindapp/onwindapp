@@ -14,7 +14,8 @@
         android:theme="@style/Theme.Onwindapp">
         <activity
             android:name=".activities.RideDetailsActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:parentActivityName=".activities.MainActivity"/>
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

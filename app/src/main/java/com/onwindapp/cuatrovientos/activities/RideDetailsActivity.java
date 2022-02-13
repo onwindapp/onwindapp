@@ -13,10 +13,11 @@ public class RideDetailsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ride_details);
+        getSupportActionBar().show();
 
         rideName = (TextView) findViewById(R.id.rideName);
         Bundle bundle = getIntent().getExtras();
-        String rideNameB = bundle.getString("rideName");
+        String rideNameB = bundle.getString("rideInfo");
         rideName.setText(rideNameB);
     }
 }
