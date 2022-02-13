@@ -1,5 +1,6 @@
 package com.onwindapp.cuatrovientos.fragments;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 
@@ -14,6 +15,7 @@ import android.view.ViewGroup;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
+import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
 import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
@@ -34,7 +36,7 @@ public class UserRidesFragment extends Fragment {
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_user_trips, container, false);
+        View view = inflater.inflate(R.layout.fragment_user_rides, container, false);
         MainActivity activity = (MainActivity) getActivity();
         String loggedUserEmail = activity.getLoggedUserId();
 
@@ -49,6 +51,16 @@ public class UserRidesFragment extends Fragment {
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
         recyclerView.setAdapter(userRidesAdapter);
+
+        userRidesAdapter.setOnItemClickListener(new UserRidesAdapter.OnItemClickListener(){
+            @Override
+            public void onItemClick(int position) {
+                Intent intentV = new Intent(getActivity(), RideDetailsActivity.class);
+                intentV.putExtra("rideName", userRides.get(position).getName());
+                startActivity(intentV);
+            }
+        });
+
         return view;
     }
 }

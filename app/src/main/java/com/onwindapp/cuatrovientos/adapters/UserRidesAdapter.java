@@ -58,7 +58,7 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
 
     @Override
     public UserTripsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_trip_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.user_ride_item, parent, false);
         UserTripsViewHolder evh = new UserTripsViewHolder(v, mListener);
         return evh;
     }

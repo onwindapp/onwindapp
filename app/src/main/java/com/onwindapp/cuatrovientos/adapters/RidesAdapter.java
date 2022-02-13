@@ -56,7 +56,7 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHol
 
     @Override
     public TripsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.ride_item, parent, false);
         TripsViewHolder evh = new TripsViewHolder(v, mListener);
         return evh;
     }
