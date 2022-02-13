@@ -1,6 +1,7 @@
 package com.onwindapp.cuatrovientos.maps;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -28,7 +29,7 @@ import java.util.Objects;
 import io.realm.Realm;
 import io.realm.RealmResults;
 
-public class MainMapActivity extends FragmentActivity implements OnMapReadyCallback {
+public class MainMapActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMainMapBinding binding;
@@ -38,7 +39,6 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         realm = Realm.getDefaultInstance();
         binding = ActivityMainMapBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
@@ -61,7 +61,6 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         for (Ride ride: rides) {
-            double pr = ride.getPoint().first();
             mMap.addMarker(new MarkerOptions()
                     .position(new LatLng(ride.getPoint().get(0), ride.getPoint().get(1)))
                     .title(String.format("Mas info de: %s", ride.getName()))

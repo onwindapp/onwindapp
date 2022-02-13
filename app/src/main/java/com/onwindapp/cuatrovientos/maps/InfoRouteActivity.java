@@ -2,6 +2,7 @@ package com.onwindapp.cuatrovientos.maps;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 
 import android.content.Intent;
@@ -41,7 +42,7 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 
-public class InfoRouteActivity extends FragmentActivity implements OnMapReadyCallback {
+public class InfoRouteActivity extends AppCompatActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityInfoRouteBinding binding;

@@ -29,13 +29,8 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
-<<<<<<< HEAD
     Boolean realmCleanMode = Boolean.FALSE;
     String loggedUserEmail;
-=======
-    Boolean realmCleanMode = true;
-    String loggedUserEmail = "mpuerta@onwind.app";
->>>>>>> 5e37260... refactor: improve dummydata
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
