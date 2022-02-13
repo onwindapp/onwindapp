@@ -4,8 +4,11 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.FragmentActivity;
 
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.Toast;
 
 import com.akexorcist.googledirection.DirectionCallback;
@@ -23,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.PolylineOptions;
@@ -31,6 +35,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.databinding.ActivityInfoRouteBinding;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.util.ArrayList;
 
@@ -42,11 +47,16 @@ public class InfoRouteActivity extends FragmentActivity implements OnMapReadyCal
     private ActivityInfoRouteBinding binding;
     private Realm realm;
     private Ride ride;
+    private Button btnEditar;
+    private int idUSer;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+//        btnEditar = (Button) findViewById(R.id.btnEditar);
+//        btnEditar.setVisibility(View.GONE);
         Bundle bundle = getIntent().getExtras();
+//        idUSer = bundle.getInt("idUser");
         realm = Realm.getDefaultInstance();
         binding = ActivityInfoRouteBinding.inflate(getLayoutInflater());
         // get the selected ride
@@ -56,6 +66,17 @@ public class InfoRouteActivity extends FragmentActivity implements OnMapReadyCal
                 ride = realm.where(Ride.class).equalTo("id", bundle.getInt("id")).findFirst();
             }
         });
+//        if (ride.getDriver().getId() == idUSer) {
+//            btnEditar.setVisibility(View.VISIBLE);
+//        }
+//
+//        btnEditar.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                // TODO: 13/02/2022 intent para ir a editar la ruta, solo puede el driver
+////                Intent intent = new Intent(this)
+//            }
+//        });
 
         setContentView(binding.getRoot());
 
@@ -109,6 +130,11 @@ public class InfoRouteActivity extends FragmentActivity implements OnMapReadyCal
 
                     }
                 });
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(destination)
+                .zoom(12)
+                .build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
 
     }
 }

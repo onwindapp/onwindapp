@@ -11,6 +11,7 @@ import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.BitmapDescriptorFactory;
+import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -18,6 +19,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.databinding.ActivityMainMapBinding;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -70,6 +72,12 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
 
             ).setTag(ride.getId());
         }
+        CameraPosition cameraPosition = new CameraPosition.Builder()
+                .target(CommonData.defaultLoc)
+                .zoom(11)
+                .build();
+        mMap.moveCamera(CameraUpdateFactory.newCameraPosition(cameraPosition));
+
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
