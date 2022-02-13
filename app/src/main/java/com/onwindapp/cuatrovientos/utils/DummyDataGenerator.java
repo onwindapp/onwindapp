@@ -25,7 +25,7 @@ public class DummyDataGenerator {
         RealmList<Double> cords2 = new RealmList<Double>();
         cords2.add(42.812615482730436);
         cords2.add(-1.6432434872372141);
-        Ride rd2 = new Ride(RidesTypes.Ida, "Pamplona", cords1, 2, "Desde pamplona", "7:30", realmUsers.get(1));
+        Ride rd2 = new Ride(RidesTypes.Ida, "Pamplona", cords1, 2, "Desde Pamplona", "7:30", realmUsers.get(1));
         rides.add(rd2);
 
         RealmList<Double> cords3 = new RealmList<Double>();

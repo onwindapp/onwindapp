@@ -17,6 +17,7 @@ import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -29,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
-    Boolean realmCleanMode = Boolean.TRUE;
+    Boolean realmCleanMode = Boolean.FALSE;
     String loggedUserEmail = "mpuerta@onwind.app";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,7 @@ public class MainActivity extends AppCompatActivity {
         }
         realmUsers = realm.where(Users.class).findAll();
         realmRides = realm.where(Ride.class).findAll();
+
         if (realmUsers.size() == 0){
             realm.beginTransaction();
             realm.copyToRealm(ddg.createUsers());
@@ -57,6 +59,22 @@ public class MainActivity extends AppCompatActivity {
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
         }
+        /*
+        Users loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
+        Ride updateRide = realm.where(Ride.class).findFirst();
+        realm.beginTransaction();
+        updateRide.addUserToRide(loggedUser);
+        realm.copyToRealmOrUpdate(updateRide);
+        realm.commitTransaction();
+
+        Users loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
+        Ride updateRide = realm.where(Ride.class).equalTo("name", "Burlada").findFirst();
+        realm.beginTransaction();
+        updateRide.addUserToRide(loggedUser);
+        realm.copyToRealmOrUpdate(updateRide);
+        realm.commitTransaction();*/
+
+        //List<Users> usersInsideRide = realmRides.get(0).getUsersJoined();
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());

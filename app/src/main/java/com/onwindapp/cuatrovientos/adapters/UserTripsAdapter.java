@@ -9,14 +9,16 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.onwindapp.cuatrovientos.R;
+import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.TripsTesting;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.List;
 
 public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.UserTripsViewHolder> {
-    private ArrayList<TripsTesting> trips;
+    private List<Ride> trips;
     private OnItemClickListener mListener;
     Context context;
 
@@ -50,7 +52,7 @@ public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.User
         }
     }
 
-    public UserTripsAdapter(Context context, ArrayList<TripsTesting> trips) {
+    public UserTripsAdapter(Context context, List<Ride> trips) {
         this.context = context;
         this.trips = trips;
     }
@@ -65,11 +67,11 @@ public class UserTripsAdapter extends RecyclerView.Adapter<UserTripsAdapter.User
 
     @Override
     public void onBindViewHolder(UserTripsViewHolder holder, int position) {
-        TripsTesting currentTrip = trips.get(position);
+        Ride currentRide = trips.get(position);
 
-        holder.username.setText(currentTrip.getUsername());
-        holder.date.setText(getRandomDate());
-        holder.tripType.setText(currentTrip.getTripType());
+        holder.username.setText(currentRide.getDescription());
+        holder.date.setText(currentRide.getMeetHour());
+        holder.tripType.setText(currentRide.getRideType().toString());
     }
 
     private String getRandomDate(){

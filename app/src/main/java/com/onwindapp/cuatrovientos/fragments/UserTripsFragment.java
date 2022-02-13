@@ -50,17 +50,14 @@ public class UserTripsFragment extends Fragment {
         realm = Realm.getDefaultInstance();
         loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
         rides = realm.where(Ride.class).findAll();
-        userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(loggedUser)).collect(Collectors.toList());
 
-        /*
-        userRides = realm.where(Ride.class).findAll();
+        if (loggedUser != null) userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(loggedUser)).collect(Collectors.toList());
 
-
-        UserTripsAdapter userTripsAdapter = new UserTripsAdapter(getActivity(), load());
+        UserTripsAdapter userTripsAdapter = new UserTripsAdapter(getActivity(), userRides);
         RecyclerView recyclerView = view.findViewById(R.id.userTripsRecycler);
         recyclerView.setHasFixedSize(true);
         recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-        recyclerView.setAdapter(userTripsAdapter);*/
+        recyclerView.setAdapter(userTripsAdapter);
         return view;
     }
 }
