@@ -29,6 +29,8 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
+    Boolean realmCleanMode = Boolean.TRUE;
+    String loggedUserEmail = "mpuerta@onwind.app";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,6 +40,11 @@ public class MainActivity extends AppCompatActivity {
         ddg = new DummyDataGenerator();
 
         realm = Realm.getDefaultInstance();
+        if (realmCleanMode){
+            realm.beginTransaction();
+            realm.deleteAll();
+            realm.commitTransaction();
+        }
         realmUsers = realm.where(Users.class).findAll();
         realmRides = realm.where(Ride.class).findAll();
         if (realmUsers.size() == 0){
@@ -47,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (realmRides.size() == 0){
             realm.beginTransaction();
-            realm.copyToRealm(ddg.createUsers());
+            realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
         }
 
@@ -96,18 +103,7 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    private ArrayList<Users> createUsers(){
-        ArrayList<Users> users = new ArrayList<Users>();
-        Users usr1 = new Users("Miguel", "Puerta", "test", "mpuerta@onwind.app", "12345678");
-        users.add(usr1);
-        Users usr2 = new Users("Juan", "Gonzalez", "test", "juan@onwind.app", "12345678");
-        users.add(usr2);
-        Users usr3 = new Users("Josu", "Ramirez", "test", "josu@onwind.app", "12345678");
-        users.add(usr3);
-        Users usr4 = new Users("Antonio", "De la Luz", "test", "antonio@onwind.app", "12345678");
-        users.add(usr4);
-        Users usr5 = new Users("Roger", "Altamira", "test", "roger@onwind.app", "12345678");
-        users.add(usr5);
-        return users;
+    public String getLoggedUserId() {
+        return loggedUserEmail;
     }
 }

@@ -32,7 +32,7 @@ public class Ride extends RealmObject {
         this.description = description;
         this.meetHour = meetHour;
         this.driver = driver;
-        this.usersJoined = null;
+        this.usersJoined = new RealmList<Users>();
     }
 
     @PrimaryKey
@@ -61,7 +61,13 @@ public class Ride extends RealmObject {
 
     private RealmList<Users> usersJoined;
 
+    public void addUserToRide(Users user){
+        usersJoined.add(user);
+    }
 
+    public void removeUserFromRide(Users user){
+        if (usersJoined.contains(user)) usersJoined.remove(user);
+    }
 
     public RidesTypes getRideType() {
         return RidesTypes.valueOf(ridesTypes);
