@@ -134,6 +134,9 @@ public class Ride extends RealmObject {
         this.driver = driver;
     }
 
+    public int getId() {
+        return this.id;
+    }
     @Override
     public String toString() {
         return "Ride{" +

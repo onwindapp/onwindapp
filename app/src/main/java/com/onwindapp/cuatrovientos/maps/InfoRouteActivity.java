@@ -1,4 +1,4 @@
-package com.onwindapp.cuatrovientos.activities;
+package com.onwindapp.cuatrovientos.maps;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -18,8 +18,6 @@ import com.akexorcist.googledirection.constant.Unit;
 import com.akexorcist.googledirection.model.Direction;
 import com.akexorcist.googledirection.model.Leg;
 import com.akexorcist.googledirection.model.Route;
-import com.akexorcist.googledirection.model.Step;
-import com.akexorcist.googledirection.request.DirectionOriginRequest;
 import com.akexorcist.googledirection.util.DirectionConverter;
 import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
@@ -35,8 +33,6 @@ import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
 
 import io.realm.Realm;
 
