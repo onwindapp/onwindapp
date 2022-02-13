@@ -24,13 +24,14 @@ import java.util.ArrayList;
 import java.util.Objects;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class MainMapActivity extends FragmentActivity implements OnMapReadyCallback {
 
     private GoogleMap mMap;
     private ActivityMainMapBinding binding;
     private Realm realm;
-    private Ride[] rides;
+    private RealmResults<Ride> rides;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,7 +44,7 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
         realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
-                rides = (Ride[]) realm.where(Ride.class).findAll().toArray();
+                rides =  realm.where(Ride.class).findAll();
             }
         });
 
@@ -58,8 +59,9 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
         mMap = googleMap;
 
         for (Ride ride: rides) {
+            double pr = ride.getPoint().first();
             mMap.addMarker(new MarkerOptions()
-                    .position(new LatLng(ride.getPoint().first(), ride.getPoint().last()))
+                    .position(new LatLng(ride.getPoint().get(0), ride.getPoint().get(1)))
                     .title(String.format("Mas info de: %s", ride.getName()))
                     .icon((ride.getRideType().equals(RidesTypes.Ida) ?
                             BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
@@ -72,7 +74,7 @@ public class MainMapActivity extends FragmentActivity implements OnMapReadyCallb
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
                 Intent intent = new Intent(MainMapActivity.this, InfoRouteActivity.class);
-                intent.putExtra("id", Objects.requireNonNull(marker.getTag()).toString());
+                intent.putExtra("id", (int) marker.getTag());
                 startActivity(intent);
             }
         });

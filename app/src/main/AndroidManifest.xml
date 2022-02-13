@@ -36,6 +36,10 @@
                 android:value="${MAPS_API_KEY}" />
 
         <activity
+                android:name=".maps.SelectionMapActivity"
+                android:exported="false"
+                android:label="@string/title_activity_selection_map" />
+        <activity
                 android:name=".maps.MainMapActivity"
                 android:exported="false"
                 android:label="@string/title_activity_main_map" />

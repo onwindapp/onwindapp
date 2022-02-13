@@ -73,9 +73,9 @@ public class InfoRouteActivity extends FragmentActivity implements OnMapReadyCal
         LatLng destination;
         if (ride.getRideType().equals(RidesTypes.Ida)) {
             origin = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
-            destination = new LatLng(42.782632, -1.689222);
+            destination = new LatLng(42.824501, -1.659990);
         } else {
-            origin = new LatLng(42.824533, -1.660065);
+            origin = new LatLng(42.824501, -1.659990);
             destination = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
         }
         mMap.addMarker(new MarkerOptions().position(origin).title("Inicio"));

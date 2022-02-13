@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
+import com.onwindapp.cuatrovientos.maps.InfoRouteActivity;
+import com.onwindapp.cuatrovientos.maps.MainMapActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
@@ -27,8 +29,13 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
+<<<<<<< HEAD
     Boolean realmCleanMode = Boolean.FALSE;
     String loggedUserEmail;
+=======
+    Boolean realmCleanMode = true;
+    String loggedUserEmail = "mpuerta@onwind.app";
+>>>>>>> 5e37260... refactor: improve dummydata
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -79,6 +86,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+        Intent intent = new Intent(this, MainMapActivity.class);
+
+        startActivity(intent);
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
