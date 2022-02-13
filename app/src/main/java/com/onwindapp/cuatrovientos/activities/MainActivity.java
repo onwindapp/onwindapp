@@ -8,45 +8,57 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageView;
 
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
-import com.onwindapp.cuatrovientos.fragments.UserTripsFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
-import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.models.Users;
-
-import java.util.Arrays;
-import java.util.List;
+import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
 import io.realm.Realm;
-import io.realm.RealmList;
+import io.realm.RealmResults;
 
 public class MainActivity extends AppCompatActivity {
     TabLayout tablayout;
     ViewPager2 pager;
     FragmentAdapter adapter;
+    RealmResults<Users> realmUsers;
+    RealmResults<Ride> realmRides;
+    DummyDataGenerator ddg;
     Realm realm;
+    Boolean realmCleanMode = Boolean.FALSE;
+    String loggedUserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
+        ddg = new DummyDataGenerator();
+
+        loggedUserEmail = "mpuerta@onwind.app";
+
         realm = Realm.getDefaultInstance();
-//        realm.executeTransaction(new Realm.Transaction() {
-//            @Override
-//            public void execute(Realm realm) {
-//                RealmList<Double> point = new RealmList<Double>();
-//                point.add(42.823967);
-//                point.add(-1.660624);
-//                Users driver = new Users("iker", "l", "123", "12@gmail.com", "123");
-//                realm.insert(new Ride(RidesTypes.Ida, "pr", point, 3, "des", 13, driver ));
-//            }
-//        });
+        if (realmCleanMode){
+            realm.beginTransaction();
+            realm.deleteAll();
+            realm.commitTransaction();
+        }
+        realmUsers = realm.where(Users.class).findAll();
+        realmRides = realm.where(Ride.class).findAll();
+
+        if (realmUsers.size() == 0){
+            realm.beginTransaction();
+            realm.copyToRealm(ddg.createUsers());
+            realm.commitTransaction();
+        }
+        if (realmRides.size() == 0){
+            realm.beginTransaction();
+            realm.copyToRealm(ddg.createRides(this.realmUsers));
+            realm.commitTransaction();
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
@@ -74,10 +86,6 @@ public class MainActivity extends AppCompatActivity {
                 tablayout.selectTab(tablayout.getTabAt(position));
             }
         });
-
-        Intent intent = new Intent(this, InfoRouteActivity.class);
-        intent.putExtra("id", 1);
-        startActivity(intent);
     }
 
     @Override
@@ -94,5 +102,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         return true;
+    }
+
+    public String getLoggedUserId() {
+        return loggedUserEmail;
     }
 }

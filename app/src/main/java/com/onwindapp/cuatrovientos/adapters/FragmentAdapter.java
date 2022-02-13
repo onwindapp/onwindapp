@@ -6,8 +6,8 @@ import androidx.fragment.app.FragmentManager;
 import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
-import com.onwindapp.cuatrovientos.fragments.TripsAvailableFragment;
-import com.onwindapp.cuatrovientos.fragments.UserTripsFragment;
+import com.onwindapp.cuatrovientos.fragments.RidesAvailableFragment;
+import com.onwindapp.cuatrovientos.fragments.UserRidesFragment;
 
 public class FragmentAdapter extends FragmentStateAdapter {
     public FragmentAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {
@@ -19,11 +19,11 @@ public class FragmentAdapter extends FragmentStateAdapter {
     public Fragment createFragment(int position) {
         switch (position){
             case 0:
-                return new UserTripsFragment();
+                return new UserRidesFragment();
             case 1:
-                return new TripsAvailableFragment();
+                return new RidesAvailableFragment();
         }
-        return new TripsAvailableFragment();
+        return new RidesAvailableFragment();
     }
 
     @Override

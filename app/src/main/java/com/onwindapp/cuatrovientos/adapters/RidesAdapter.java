@@ -9,12 +9,12 @@ import android.widget.TextView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.onwindapp.cuatrovientos.R;
-import com.onwindapp.cuatrovientos.models.TripsTesting;
+import com.onwindapp.cuatrovientos.models.Ride;
 
-import java.util.ArrayList;
+import java.util.List;
 
-public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHolder> {
-    private ArrayList<TripsTesting> trips;
+public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHolder> {
+    private List<Ride> trips;
     private OnItemClickListener mListener;
     Context context;
 
@@ -48,7 +48,7 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHol
         }
     }
 
-    public TripsAdapter(Context context, ArrayList<TripsTesting> trips) {
+    public RidesAdapter(Context context, List<Ride> trips) {
         this.context = context;
         this.trips = trips;
     }
@@ -56,18 +56,18 @@ public class TripsAdapter extends RecyclerView.Adapter<TripsAdapter.TripsViewHol
 
     @Override
     public TripsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.trip_item, parent, false);
+        View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.ride_item, parent, false);
         TripsViewHolder evh = new TripsViewHolder(v, mListener);
         return evh;
     }
 
     @Override
     public void onBindViewHolder(TripsViewHolder holder, int position) {
-        TripsTesting currentTrip = trips.get(position);
+        Ride currentRide = trips.get(position);
 
-        holder.username.setText(currentTrip.getUsername());
-        holder.spacesAvailable.setText(currentTrip.getSlots()+" Plazas");
-        holder.tripType.setText(currentTrip.getTripType());
+        holder.username.setText(currentRide.getDescription());
+        holder.spacesAvailable.setText(currentRide.getAvailablePlaces()+" Plazas");
+        holder.tripType.setText(currentRide.getRideType().toString());
     }
 
     @Override
