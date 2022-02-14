@@ -49,14 +49,19 @@ public class DummyDataGenerator {
     public ArrayList<Users> createUsers(){
         ArrayList<Users> users = new ArrayList<Users>();
         Users usr1 = new Users("Miguel", "Puerta", "test", "mpuerta@onwind.app", "12345678");
+        usr1.setCO2points(100);
         users.add(usr1);
         Users usr2 = new Users("Juan", "Gonzalez", "test", "juan@onwind.app", "12345678");
+        usr2.setCO2points(25);
         users.add(usr2);
         Users usr3 = new Users("Josu", "Ramirez", "test", "josu@onwind.app", "12345678");
+        usr3.setCO2points(0);
         users.add(usr3);
         Users usr4 = new Users("Antonio", "De la Luz", "test", "antonio@onwind.app", "12345678");
+        usr4.setCO2points(30);
         users.add(usr4);
         Users usr5 = new Users("Roger", "Altamira", "test", "roger@onwind.app", "12345678");
+        usr5.setCO2points(90);
         users.add(usr5);
         this.users = users;
         return users;

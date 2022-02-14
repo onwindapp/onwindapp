@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
-    Boolean realmCleanMode = Boolean.FALSE;
+    Boolean realmCleanMode = Boolean.TRUE;
     String loggedUserEmail;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
