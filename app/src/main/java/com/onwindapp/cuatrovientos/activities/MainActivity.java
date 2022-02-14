@@ -12,6 +12,8 @@ import android.view.MenuItem;
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
+import com.onwindapp.cuatrovientos.maps.MainMapActivity;
+import com.onwindapp.cuatrovientos.maps.SelectionMapActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
@@ -79,6 +81,10 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+
+//        Intent intent = new Intent(this, SelectionMapActivity.class);
+//
+//        startActivity(intent);
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override

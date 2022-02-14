@@ -17,31 +17,27 @@ public class DummyDataGenerator {
         ArrayList<Ride> rides = new ArrayList<Ride>();
 
         RealmList<Double> cords1 = new RealmList<Double>();
-        cords1.add(42.788515369171954);
-        cords1.add(-1.6926605055655837);
-        RealmList<Users> usersJoined1 = new RealmList<Users>();
-        usersJoined1.add(realmUsers.get(0));
-        Ride rd1 = new Ride(RidesTypes.Ida, "Zizur", cords1, 4, "Desde Zizur", "7:45", realmUsers.get(2), usersJoined1);
+        cords1.add(42.787082);
+        cords1.add(-1.679497);
+        Ride rd1 = new Ride(RidesTypes.Ida, "Zizur", cords1, 4, "Desde Zizur", "7:45", realmUsers.get(2));
         rides.add(rd1);
 
         RealmList<Double> cords2 = new RealmList<Double>();
-        cords2.add(42.812615482730436);
-        cords2.add(-1.6432434872372141);
-        Ride rd2 = new Ride(RidesTypes.Ida, "Pamplona", cords1, 2, "Desde Pamplona", "7:30", realmUsers.get(1));
+        cords2.add(42.800934);
+        cords2.add(-1.648758);
+        Ride rd2 = new Ride(RidesTypes.Ida, "Pamplona", cords2, 2, "Desde pamplona", "7:30", realmUsers.get(1));
         rides.add(rd2);
 
         RealmList<Double> cords3 = new RealmList<Double>();
-        cords3.add(42.826324307988195);
-        cords3.add(-1.616131718988979);
-        Ride rd3 = new Ride(RidesTypes.Vuelta, "Burlada", cords1, 7, "A Burlada", "7:00", realmUsers.get(0));
+        cords3.add(42.825740);
+        cords3.add(-1.609960);
+        Ride rd3 = new Ride(RidesTypes.Vuelta, "Burlada", cords3, 7, "A Burlada", "7:00", realmUsers.get(0));
         rides.add(rd3);
 
         RealmList<Double> cords4 = new RealmList<Double>();
-        cords4.add(42.80148564798235);
-        cords4.add(-1.6895813295148396);
-        RealmList<Users> usersJoined2 = new RealmList<Users>();
-        usersJoined2.add(realmUsers.get(0));
-        Ride rd4 = new Ride(RidesTypes.Ida, "Barañain", cords1, 1, "Desde Barañain", "14:30", realmUsers.get(4), usersJoined2);
+        cords4.add(42.852731);
+        cords4.add(-1.664235);
+        Ride rd4 = new Ride(RidesTypes.Ida, "Barañain", cords4, 1, "Desde Barañain", "8:00", realmUsers.get(4));
         rides.add(rd4);
 
         return rides;
