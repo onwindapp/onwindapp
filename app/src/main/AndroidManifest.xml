@@ -40,11 +40,6 @@
                 android:label="@string/title_activity_main_map"
                 android:parentActivityName=".activities.MainActivity" />
         <activity
-                android:name=".maps.InfoRouteActivity"
-                android:exported="false"
-                android:label="@string/title_activity_info_route"
-                android:parentActivityName=".activities.MainActivity" />
-        <activity
                 android:name=".activities.RankingActivity"
                 android:exported="true"
                 android:parentActivityName=".activities.MainActivity" />

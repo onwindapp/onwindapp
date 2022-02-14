@@ -5,7 +5,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.onwindapp.cuatrovientos.R;
-import com.onwindapp.cuatrovientos.databinding.ActivityInfoRouteBinding;
 import com.onwindapp.cuatrovientos.fragments.MapsFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 
