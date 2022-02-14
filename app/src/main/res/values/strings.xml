@@ -1,3 +1,17 @@
 <resources>
-    <string name="app_name">onwindapp</string>
+    <string name="app_name">Onwind</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_route_info">RouteInfoActivity</string>
+    <string name="title_activity_info_route">InfoRouteActivity</string>
+    <string name="tipo">Tipo: </string>
+    <string name="name">Dirección: </string>
+    <string name="plazas">Plazas Disponibles: </string>
+    <string name="hora">Hora de quedada: </string>
+    <string name="conductor">Conductor: </string>
+    <string name="desc">Descripción: </string>
+
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main_map">MainMapActivity</string>
+    <string name="title_activity_selection_map">SelectionMapActivity</string>
 </resources>
