@@ -82,9 +82,9 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        Intent intent = new Intent(this, SelectionMapActivity.class);
-
-        startActivity(intent);
+//        Intent intent = new Intent(this, SelectionMapActivity.class);
+//
+//        startActivity(intent);
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
