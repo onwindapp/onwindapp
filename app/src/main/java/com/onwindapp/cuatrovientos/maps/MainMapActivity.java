@@ -80,7 +80,7 @@ public class MainMapActivity extends AppCompatActivity implements OnMapReadyCall
         mMap.setOnInfoWindowClickListener(new GoogleMap.OnInfoWindowClickListener() {
             @Override
             public void onInfoWindowClick(@NonNull Marker marker) {
-                Intent intent = new Intent(MainMapActivity.this, InfoRouteActivity.class);
+                Intent intent = new Intent(MainMapActivity.this, RouteActivity.class);
                 intent.putExtra("id", (int) marker.getTag());
                 startActivity(intent);
             }
