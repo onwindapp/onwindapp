@@ -10,6 +10,7 @@ import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
 import com.onwindapp.cuatrovientos.fragments.RideCreation2Fragment;
 import com.onwindapp.cuatrovientos.fragments.RideCreation3Fragment;
 import com.onwindapp.cuatrovientos.fragments.RidesAvailableFragment;
+import com.onwindapp.cuatrovientos.fragments.SelectionMapFragment;
 import com.onwindapp.cuatrovientos.fragments.UserRidesFragment;
 
 public class RideCreationAdapter extends FragmentStateAdapter {
@@ -24,7 +25,7 @@ public class RideCreationAdapter extends FragmentStateAdapter {
             case 0:
                 return new RideCreation1Fragment();
             case 1:
-                return new RideCreation2Fragment();
+                return new SelectionMapFragment();
             case 2:
                 return new RideCreation3Fragment();
         }

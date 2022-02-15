@@ -5,22 +5,22 @@
     <uses-permission android:name="android.permission.INTERNET" />
 
     <application
-            android:name=".app.OnWindApp"
-            android:allowBackup="true"
-            android:icon="@mipmap/ic_launcher_ow_test2"
-            android:label="@string/app_name"
-            android:roundIcon="@mipmap/ic_launcher_ow_test2_round"
-            android:supportsRtl="true"
-            android:theme="@style/Theme.Onwindapp">
+        android:name=".app.OnWindApp"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher_ow_test2"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_ow_test2_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Onwindapp">
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
-<!--        <activity-->
-<!--            android:name=".maps.SelectionMapActivity"-->
-<!--            android:exported="false"-->
-<!--            android:label="@string/title_activity_selection_map" />-->
+        <!--        <activity-->
+        <!--            android:name=".maps.SelectionMapActivity"-->
+        <!--            android:exported="false"-->
+        <!--            android:label="@string/title_activity_selection_map" />-->
         <activity
             android:name=".maps.MainMapActivity"
             android:exported="false"
@@ -31,12 +31,13 @@
             android:exported="true"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-                android:name=".maps.RouteActivity"
-                android:exported="true"
-                android:parentActivityName=".activities.MainActivity" />
+            android:name=".maps.RouteActivity"
+            android:exported="true"
+            android:parentActivityName=".activities.MainActivity" />
+
 
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".activities.RideCreationActivity"
             android:exported="true" />
         <activity
             android:name=".activities.MainActivity"
