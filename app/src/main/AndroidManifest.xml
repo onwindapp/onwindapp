@@ -12,19 +12,15 @@
             android:roundIcon="@mipmap/ic_launcher_ow_test2_round"
             android:supportsRtl="true"
             android:theme="@style/Theme.Onwindapp">
-        <activity
-                android:name=".maps.RouteActivity"
-                android:exported="false"
-                android:parentActivityName=".activities.MainActivity"/>
 
         <meta-data
                 android:name="com.google.android.geo.API_KEY"
                 android:value="${MAPS_API_KEY}" />
 
         <activity
-                android:name=".maps.SelectionMapActivity"
+                android:name=".maps.RouteActivity"
                 android:exported="false"
-                android:label="@string/title_activity_selection_map" />
+                android:parentActivityName=".activities.MainActivity" />
         <activity
                 android:name=".maps.MainMapActivity"
                 android:exported="false"
