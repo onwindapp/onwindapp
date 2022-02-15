@@ -33,6 +33,7 @@ public class Ride extends RealmObject {
         this.meetHour = meetHour;
         this.driver = driver;
         this.usersJoined = new RealmList<Users>();
+        this.isFinished = false;
     }
 
     @PrimaryKey
@@ -60,6 +61,16 @@ public class Ride extends RealmObject {
     private Users driver;
 
     private RealmList<Users> usersJoined;
+
+    private Boolean isFinished;
+
+    public Boolean getFinished() {
+        return isFinished;
+    }
+
+    public void finishRide() {
+        isFinished = true;
+    }
 
     public void addUserToRide(Users user){
         usersJoined.add(user);

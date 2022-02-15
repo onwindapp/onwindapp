@@ -17,6 +17,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
 import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
 import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
+import com.onwindapp.cuatrovientos.maps.RouteActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.CommonData;
@@ -55,9 +56,9 @@ public class UserRidesFragment extends Fragment {
             userRidesAdapter.setOnItemClickListener(new UserRidesAdapter.OnItemClickListener(){
                 @Override
                 public void onItemClick(int position) {
-                    Intent intentV = new Intent(getActivity(), RideDetailsActivity.class);
+                    Intent intentV = new Intent(getActivity(), RouteActivity.class);
                     int id = userRides.get(position).getId();
-                    intentV.putExtra("rideInfo", Integer.toString(userRides.get(position).getId()) +":u");
+                    intentV.putExtra("id", id);
                     startActivity(intentV);
                 }
             });

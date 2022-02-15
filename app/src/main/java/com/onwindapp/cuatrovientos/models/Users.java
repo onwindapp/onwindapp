@@ -101,7 +101,7 @@ public class Users extends RealmObject {
     }
 
     public void setCO2points(float CO2points) {
-        this.CO2points = CO2points;
+        this.CO2points += CO2points;
     }
 
     public boolean isBan() {

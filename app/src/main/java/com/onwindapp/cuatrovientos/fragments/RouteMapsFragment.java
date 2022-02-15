@@ -39,7 +39,7 @@ import java.util.ArrayList;
 
 import io.realm.Realm;
 
-public class MapsFragment extends Fragment {
+public class RouteMapsFragment extends Fragment {
     private GoogleMap mMap;
     private Ride ride;
     public void setData(Ride ride) {
