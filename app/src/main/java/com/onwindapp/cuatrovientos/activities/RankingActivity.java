@@ -1,10 +1,12 @@
 package com.onwindapp.cuatrovientos.activities;
 
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Build;
 import android.os.Bundle;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RankingAdapter;
@@ -23,6 +25,7 @@ public class RankingActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     LinearLayoutManager linearLayoutManager;
     Realm realm;
+    @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
