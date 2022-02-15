@@ -9,7 +9,7 @@
     android:background="@color/ow_blue">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txt4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Frag3"

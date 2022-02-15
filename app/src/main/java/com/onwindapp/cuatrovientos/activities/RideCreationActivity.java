@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 public class RideCreationActivity extends AppCompatActivity {
     ViewPager2 pager;
@@ -23,6 +24,7 @@ public class RideCreationActivity extends AppCompatActivity {
     Boolean firstInit = Boolean.TRUE;
     Button btnNext, btnBack;
     Boolean readyToConfirm = Boolean.FALSE;
+    String markerInfo;
     int nCurrentPage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -84,7 +86,6 @@ public class RideCreationActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
     public void addDotsIndicator(int position){
         mDots = new TextView[3];
