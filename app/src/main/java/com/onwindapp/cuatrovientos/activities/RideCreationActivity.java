@@ -36,6 +36,7 @@ public class RideCreationActivity extends AppCompatActivity {
         FragmentManager fm = getSupportFragmentManager();
         adapter = new RideCreationAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
+        pager.setUserInputEnabled(false);
         addDotsIndicator(0);
 
         btnNext.setOnClickListener(new View.OnClickListener() {
