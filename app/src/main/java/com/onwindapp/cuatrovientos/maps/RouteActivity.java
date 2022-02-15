@@ -3,6 +3,7 @@ package com.onwindapp.cuatrovientos.maps;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
 import com.onwindapp.cuatrovientos.fragments.RouteMapsFragment;
@@ -22,8 +24,9 @@ import io.realm.Realm;
 public class RouteActivity extends AppCompatActivity {
     private Realm realm;
     private Ride ride;
-    private TextView txtTitulo, txtDescripcion;
-    private Button btnEditar, btnUnirse, btnTerminarViaje;
+    private TextView txtTitulo, txtDescripcion, txtDataTipo, txtDataHora, txtDataPlazas, txtDataConductor;
+    private Button btnTerminarViaje, btnEditar;
+    private FloatingActionButton btnUnirse;
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,8 +36,12 @@ public class RouteActivity extends AppCompatActivity {
         txtTitulo = (TextView) findViewById(R.id.txtDireccion);
         txtDescripcion = (TextView) findViewById(R.id.txtDescripccion);
         btnEditar = (Button) findViewById(R.id.btnEditar);
-        btnUnirse = (Button) findViewById(R.id.btnUnirse);
+        btnUnirse = (FloatingActionButton) findViewById(R.id.btnUnirse);
         btnTerminarViaje = (Button) findViewById(R.id.btnTerminar);
+        txtDataTipo = (TextView) findViewById(R.id.txtDataTipo);
+        txtDataHora = (TextView) findViewById(R.id.txtDataHora);
+        txtDataPlazas = (TextView) findViewById(R.id.txtDataPlazas);
+        txtDataConductor = (TextView) findViewById(R.id.txtDataConductor);
 
         btnEditar.setVisibility(View.GONE);
         btnTerminarViaje.setVisibility(View.GONE);
@@ -48,6 +55,12 @@ public class RouteActivity extends AppCompatActivity {
 
         txtTitulo.setText(ride.getName());
         txtDescripcion.setText(ride.getDescription());
+        txtDataTipo.setText(String.format("Viaje de:%s", ride.getRideType().toString()));
+        txtDataHora.setText(ride.getMeetHour());
+        txtDataPlazas.setText(String.format("%s", ride.getAvailablePlaces()));
+        txtDataConductor.setText(ride.getDriver().getName());
+
+
         if (CommonData.currentUser.getId() == ride.getDriver().getId() && !ride.getFinished()) {
             btnEditar.setVisibility(View.VISIBLE);
             btnTerminarViaje.setVisibility(View.VISIBLE);

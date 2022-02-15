@@ -88,37 +88,80 @@
                 android:textSize="16sp" />
 
         <Button
-                android:text="editar Viaje"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnEditar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9"
-                android:layout_marginTop="12dp"
-                android:layout_marginStart="28dp" />
-
-        <Button
-                android:text="unirse"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:id="@+id/btnUnirse"
-                app:layout_constraintTop_toBottomOf="@+id/btnEditar"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.501"
-                app:layout_constraintVertical_bias="0.278" />
-
-        <Button
                 android:text="Terminar Viaje"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/btnTerminar"
                 app:layout_constraintTop_toBottomOf="@+id/textView9"
-                android:layout_marginTop="12dp"
+                android:layout_marginTop="20dp"
                 app:layout_constraintStart_toEndOf="@+id/btnEditar"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.835" />
+                app:layout_constraintHorizontal_bias="0.056" />
+
+        <Button
+                android:text="editar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/btnEditar"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9"
+                android:layout_marginTop="20dp"
+                android:layout_marginStart="20dp" />
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                app:srcCompat="@android:drawable/ic_input_add"
+                android:id="@+id/btnUnirse"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginEnd="16dp"
+                android:layout_marginBottom="28dp" />
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDataTipo"
+                app:layout_constraintStart_toEndOf="@+id/textView6"
+                android:layout_marginStart="16dp"
+                app:layout_constraintTop_toBottomOf="@+id/txtDescripccion"
+                android:layout_marginTop="36dp"
+                android:textSize="16sp" />
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDataHora"
+                app:layout_constraintTop_toBottomOf="@+id/txtDataTipo"
+                app:layout_constraintStart_toEndOf="@+id/textView7"
+                android:layout_marginTop="12dp"
+                android:layout_marginStart="16dp"
+                android:textSize="16sp" />
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDataPlazas"
+                app:layout_constraintTop_toBottomOf="@+id/txtDataHora"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/textView8"
+                android:layout_marginStart="8dp"
+                android:textSize="16sp" />
+
+        <TextView
+                android:text="TextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/txtDataConductor"
+                android:textSize="16sp"
+                app:layout_constraintTop_toBottomOf="@+id/txtDataPlazas"
+                android:layout_marginTop="12dp"
+                app:layout_constraintStart_toEndOf="@+id/textView9"
+                android:layout_marginStart="8dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </LinearLayout>
