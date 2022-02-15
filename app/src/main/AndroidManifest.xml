@@ -30,10 +30,12 @@
                 android:name=".activities.RankingActivity"
                 android:exported="true"
                 android:parentActivityName=".activities.MainActivity" />
+       
         <activity
             android:name=".maps.RouteActivity"
             android:exported="true"
             android:parentActivityName=".activities.MainActivity" />
+
 
 
 
