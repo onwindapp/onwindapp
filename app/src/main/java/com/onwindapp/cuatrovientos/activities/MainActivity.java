@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
@@ -16,6 +17,7 @@ import com.onwindapp.cuatrovientos.maps.MainMapActivity;
 import com.onwindapp.cuatrovientos.maps.SelectionMapActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
 import io.realm.Realm;
@@ -28,9 +30,9 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
+    Users pruw;
     Realm realm;
-    Boolean realmCleanMode = Boolean.TRUE;
-    String loggedUserEmail;
+    Boolean realmCleanMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +41,18 @@ public class MainActivity extends AppCompatActivity {
         pager = findViewById(R.id.view_pager);
         ddg = new DummyDataGenerator();
 
-        loggedUserEmail = "mpuerta@onwind.app";
-
         realm = Realm.getDefaultInstance();
+        // TODO: 15/02/2022 temp
+
+        realm.executeTransaction(new Realm.Transaction() {
+            @Override
+            public void execute(Realm realm) {
+                CommonData.currentUser = realm.where(Users.class).equalTo("mail", "mpuerta@onwind.app").findFirst();
+            }
+        });
+
+
+        // todo: refactor ralm transctions
         if (realmCleanMode){
             realm.beginTransaction();
             realm.deleteAll();
@@ -82,9 +93,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Intent intent = new Intent(this, SelectionMapActivity.class);
-//
-//        startActivity(intent);
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
@@ -110,7 +118,4 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    public String getLoggedUserId() {
-        return loggedUserEmail;
-    }
 }

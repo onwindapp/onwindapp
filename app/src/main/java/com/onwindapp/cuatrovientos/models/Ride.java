@@ -98,8 +98,11 @@ public class Ride extends RealmObject {
         return availablePlaces;
     }
 
-    public void setAvailablePlaces(int availablePlaces) {
-        this.availablePlaces = availablePlaces;
+    public void addPersonToRide(Users person) {
+        if (this.availablePlaces > 0) {
+            this.availablePlaces --;
+            this.usersJoined.add(person);
+        }
     }
 
     public String getDescription() {

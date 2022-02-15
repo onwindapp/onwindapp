@@ -139,11 +139,14 @@ public class Users extends RealmObject {
 
         Users users = (Users) o;
 
+        if (id != users.id) return false;
         return mail.equals(users.mail);
     }
 
     @Override
     public int hashCode() {
-        return mail.hashCode();
+        int result = id;
+        result = 31 * result + mail.hashCode();
+        return result;
     }
 }
