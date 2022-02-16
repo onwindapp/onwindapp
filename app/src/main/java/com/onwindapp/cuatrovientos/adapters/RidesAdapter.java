@@ -65,7 +65,9 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHol
     @Override
     public void onBindViewHolder(TripsViewHolder holder, int position) {
         Ride currentRide = trips.get(position);
-
+//        if (currentRide.getAvailablePlaces() < 0) {
+//            holder.set
+//        }
         holder.username.setText(currentRide.getDescription());
         holder.spacesAvailable.setText(currentRide.getAvailablePlaces()+" Plazas");
         holder.tripType.setText(currentRide.getRideType().toString());
