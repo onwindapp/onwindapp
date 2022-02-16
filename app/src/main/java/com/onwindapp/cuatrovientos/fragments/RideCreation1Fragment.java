@@ -2,8 +2,10 @@ package com.onwindapp.cuatrovientos.fragments;
 
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
+import android.content.Context;
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 
 import android.text.InputType;
@@ -18,13 +20,32 @@ import android.widget.Switch;
 import android.widget.TimePicker;
 
 import com.onwindapp.cuatrovientos.R;
+import com.onwindapp.cuatrovientos.models.Ride;
 
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class RideCreation1Fragment extends Fragment {
-
+    private DataListener callback;
+    private Ride ride;
     public RideCreation1Fragment() { }
+
+    @Override
+    public void onAttach(@NonNull Context context) {
+        super.onAttach(context);
+        try {
+            callback = (DataListener) context;
+        } catch (Exception e) {
+            throw new ClassCastException("Data not implemet");
+        }
+    }
+
+    @Override
+    public void onDetach() {
+        super.onDetach();
+        this.callback.sendData(new Ride("Prueba"));
+
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -88,5 +109,8 @@ public class RideCreation1Fragment extends Fragment {
             }
         };
         new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR)).show();
+    }
+    public interface DataListener {
+        public void sendData(Ride ride);
     }
 }

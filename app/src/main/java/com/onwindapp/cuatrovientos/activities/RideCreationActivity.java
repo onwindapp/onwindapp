@@ -14,9 +14,11 @@ import android.widget.Toast;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
+import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
+import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
-public class RideCreationActivity extends AppCompatActivity {
+public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.DataListener {
     ViewPager2 pager;
     RideCreationAdapter adapter;
     LinearLayout mDotLayout;
@@ -102,5 +104,10 @@ public class RideCreationActivity extends AppCompatActivity {
         if (mDots.length > 0){
             mDots[position].setTextColor(getResources().getColor(R.color.white));
         }
+    }
+
+    @Override
+    public void sendData(Ride ride) {
+        CommonData.createRide = ride;
     }
 }

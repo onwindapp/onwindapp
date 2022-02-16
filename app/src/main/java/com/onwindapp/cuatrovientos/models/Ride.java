@@ -36,6 +36,15 @@ public class Ride extends RealmObject {
         this.isFinished = false;
     }
 
+    // todo prueba
+    public Ride(String name) {
+        this.id = OnWindApp.RideId.incrementAndGet();
+        this.name = name;
+        this.ridesTypes = this.saveRideType(RidesTypes.Ida);
+        this.point = null;
+        this.description = "ddd";
+    }
+
     @PrimaryKey
     private int id;
 
