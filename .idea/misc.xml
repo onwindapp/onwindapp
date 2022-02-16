@@ -3,30 +3,26 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/2DAM/Android/onwindapp/app/src/main/res/layout-w1240dp/content_scrolling.xml" value="0.1" />
-        <entry key="..\:/2DAM/Android/onwindapp/app/src/main/res/layout/activity_info_route.xml" value="0.136" />
         <entry key="..\:/2DAM/Android/onwindapp/app/src/main/res/layout/activity_main.xml" value="0.24010416666666667" />
         <entry key="..\:/2DAM/Android/onwindapp/app/src/main/res/layout/activity_route_info.xml" value="0.25416666666666665" />
         <entry key="..\:/2DAM/Android/onwindapp/app/src/main/res/layout/content_scrolling.xml" value="0.25" />
         <entry key="..\:/Proyectos/android/onwindapp/app/src/main/res/layout/activity_info_route.xml" value="0.5541666666666667" />
+        <entry key="..\:/Proyectos/android/onwindapp/app/src/main/res/layout/activity_route.xml" value="0.5" />
+        <entry key="..\:/Proyectos/android/onwindapp/app/src/main/res/layout/fragment_ride_creation3.xml" value="0.2625" />
+        <entry key="..\:/Proyectos/android/onwindapp/app/src/main/res/layout/fragment_selection_map.xml" value="0.5541666666666667" />
+        <entry key="..\:/Proyectos/android/onwindapp/app/src/main/res/layout/ride_item.xml" value="0.9162512462612163" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/drawable-v24/person_icon.xml" value="0.183" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/drawable/round.xml" value="0.3815" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/activity_login.xml" value="0.23428815733219324" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/activity_ranking.xml" value="0.31295425395468146" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/activity_ride_creation.xml" value="0.1" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/activity_ride_details.xml" value="0.24326635314236852" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/fragment_ride_creation1.xml" value="0.4659498207885305" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/fragment_ride_creation2.xml" value="0.2830269345874305" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/fragment_ride_creation3.xml" value="0.2830269345874305" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/fragment_rides_available.xml" value="0.23428815733219324" />
-        <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/fragment_user_rides.xml" value="0.2830269345874305" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/ranking_item.xml" value="0.2526720820863617" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/layout/ride_item.xml" value="0.31295425395468146" />
         <entry key="..\:/android_workspace/onwindapp/app/src/main/res/menu/main.xml" value="0.24326635314236852" />
       </map>
     </option>
   </component>
-  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" default="true" project-jdk-name="11" project-jdk-type="JavaSDK">
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_11" project-jdk-name="14" project-jdk-type="JavaSDK">
     <output url="file://$PROJECT_DIR$/build/classes" />
   </component>
   <component name="ProjectType">

@@ -68,7 +68,7 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
         Ride currentRide = trips.get(position);
 
         holder.username.setText(currentRide.getDescription());
-        holder.date.setText(currentRide.getMeetHour());
+        holder.date.setText(currentRide.getDateTime());
         holder.tripType.setText(currentRide.getRideType().toString());
     }
 

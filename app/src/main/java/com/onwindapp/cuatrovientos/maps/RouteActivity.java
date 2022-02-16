@@ -3,7 +3,6 @@ package com.onwindapp.cuatrovientos.maps;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
@@ -56,7 +55,7 @@ public class RouteActivity extends AppCompatActivity {
         txtTitulo.setText(ride.getName());
         txtDescripcion.setText(ride.getDescription());
         txtDataTipo.setText(String.format("Viaje de:%s", ride.getRideType().toString()));
-        txtDataHora.setText(ride.getMeetHour());
+        txtDataHora.setText(ride.getDateTime());
         txtDataPlazas.setText(String.format("%s", ride.getAvailablePlaces()));
         txtDataConductor.setText(ride.getDriver().getName());
 

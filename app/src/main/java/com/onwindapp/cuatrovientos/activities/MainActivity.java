@@ -27,7 +27,6 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
-    Users pruw;
     Realm realm;
     Boolean realmCleanMode = false;
     @Override
