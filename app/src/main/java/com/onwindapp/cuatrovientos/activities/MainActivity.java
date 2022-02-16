@@ -38,13 +38,12 @@ public class MainActivity extends AppCompatActivity {
         ddg = new DummyDataGenerator();
 
         realm = Realm.getDefaultInstance();
-        // TODO: 15/02/2022 temp
 
-        realm.executeTransaction(new Realm.Transaction() {
-            @Override
-            public void execute(Realm realm) {
-                CommonData.currentUser = realm.where(Users.class).equalTo("mail", "mpuerta@onwind.app").findFirst();
-            }
+        // TODO: 15/02/2022 temp
+        realm.executeTransaction(realm -> {
+            CommonData.currentUser = realm.where(Users.class)
+                    .equalTo("mail", "mpuerta@onwind.app")
+                    .findFirst();
         });
 
 
@@ -111,6 +110,17 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RankingActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.EditarPerfil) {
+            // todo refactor,
+            Intent intent = new Intent(this, RankingActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.Salir) {
+            // todo refactor,
+            Intent intent = new Intent(this, RankingActivity.class);
+            startActivity(intent);
+        }
+
         return true;
     }
 
