@@ -20,8 +20,7 @@
         app:layout_constraintHorizontal_bias="0.722"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606"
-        android:theme="@style/SCBSwitch"/>
+        app:layout_constraintVertical_bias="0.606"/>
 
     <TextView
         android:id="@+id/placesAlbl"
@@ -130,7 +129,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.169"
-        tools:ignore="UseSwitchCompatOrMaterialXml" />
+        tools:ignore="UseSwitchCompatOrMaterialXml"
+        android:theme="@style/SCBSwitch"/>
 
     <TextView
         android:id="@+id/textView10"
