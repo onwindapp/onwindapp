@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/rc1"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/rc1"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".fragments.RideCreation1Fragment"
-    android:background="@color/ow_blue">
+    android:background="@color/ow_blue"
+    tools:context=".fragments.RideCreation1Fragment">
 
     <TextView
         android:id="@+id/datelbl"
@@ -20,7 +20,7 @@
         app:layout_constraintHorizontal_bias="0.722"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.606"/>
+        app:layout_constraintVertical_bias="0.606" />
 
     <TextView
         android:id="@+id/placesAlbl"
@@ -123,14 +123,14 @@
         android:layout_height="wrap_content"
         android:text="Ida  "
         android:textColor="@color/white"
+        android:theme="@style/SCBSwitch"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.402"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.169"
-        tools:ignore="UseSwitchCompatOrMaterialXml"
-        android:theme="@style/SCBSwitch"/>
+        tools:ignore="UseSwitchCompatOrMaterialXml" />
 
     <TextView
         android:id="@+id/textView10"
@@ -186,5 +186,17 @@
         app:layout_constraintHorizontal_bias="0.78"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
+    <CheckBox
+        android:id="@+id/chkAccept"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Acepto la política de privacidad y seguridad"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.836" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

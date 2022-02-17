@@ -1,5 +1,6 @@
 package com.onwindapp.cuatrovientos.fragments;
 
+import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -13,39 +14,25 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.CheckBox;
 import android.widget.DatePicker;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Switch;
 import android.widget.TimePicker;
+import android.widget.Toast;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
 
+import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class RideCreation1Fragment extends Fragment {
-    private DataListener callback;
     private Ride ride;
+    private CheckBox chkAccept;
     public RideCreation1Fragment() { }
-
-    @Override
-    public void onAttach(@NonNull Context context) {
-        super.onAttach(context);
-        try {
-            callback = (DataListener) context;
-        } catch (Exception e) {
-            throw new ClassCastException("Data not implemet");
-        }
-    }
-
-    @Override
-    public void onDetach() {
-        super.onDetach();
-        this.callback.sendData(new Ride("Prueba"));
-
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -54,8 +41,21 @@ public class RideCreation1Fragment extends Fragment {
         EditText date, time;
         time = (EditText) view.findViewById(R.id.timeSelector);
         date = (EditText) view.findViewById(R.id.dateselector);
+        chkAccept = (CheckBox) view.findViewById(R.id.chkAccept);
         date.setInputType(InputType.TYPE_NULL);
         time.setInputType(InputType.TYPE_NULL);
+
+        chkAccept.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chkAccept.isChecked()){ ;
+                    someEventListener.someEvent(new Ride("test"));
+                } else {
+                    someEventListener.someEvent(null);
+                }
+            }
+        });
+
 
         time.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -110,7 +110,20 @@ public class RideCreation1Fragment extends Fragment {
         };
         new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR)).show();
     }
-    public interface DataListener {
-        public void sendData(Ride ride);
+
+    public interface onSomeEventListener {
+        public void someEvent(Ride ride);
+    }
+
+    onSomeEventListener someEventListener;
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        try {
+            someEventListener = (onSomeEventListener) activity;
+        } catch (ClassCastException e) {
+            throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
+        }
     }
 }

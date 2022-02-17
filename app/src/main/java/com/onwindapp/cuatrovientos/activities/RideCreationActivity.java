@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.Fragment;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -18,7 +19,7 @@ import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
-public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.DataListener {
+public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.onSomeEventListener {
     ViewPager2 pager;
     RideCreationAdapter adapter;
     LinearLayout mDotLayout;
@@ -27,6 +28,8 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     Button btnNext, btnBack;
     Boolean readyToConfirm = Boolean.FALSE;
     String markerInfo;
+    Ride tmpRide;
+    String data;
     int nCurrentPage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,6 +45,8 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         pager.setAdapter(adapter);
         pager.setUserInputEnabled(false);
         addDotsIndicator(0);
+
+
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -105,9 +110,13 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             mDots[position].setTextColor(getResources().getColor(R.color.white));
         }
     }
-
     @Override
-    public void sendData(Ride ride) {
-        CommonData.createRide = ride;
+    public void someEvent(Ride ride) {
+        this.tmpRide = ride;
+        if (ride == null){
+            btnNext.setVisibility(View.INVISIBLE);
+        } else {
+            btnNext.setVisibility(View.VISIBLE);
+        }
     }
 }
