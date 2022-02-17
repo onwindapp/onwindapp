@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
         realmUsers = realm.where(Users.class).findAll();
         realmRides = realm.where(Ride.class).findAll();
 
-        if (realmUsers.size() == 0){
+        /*if (realmUsers.size() == 0){
             realm.beginTransaction();
             realm.copyToRealm(ddg.createUsers());
             realm.commitTransaction();
@@ -67,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
             realm.beginTransaction();
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
-        }
+        }*/
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());

@@ -26,6 +26,10 @@ public class Users extends RealmObject {
 
     public Users() {}
 
+    public Users(String mail) {
+        this.mail = mail;
+    }
+
     public Users(String name, String surname, String password, String mail, String telephone) {
         this.id = OnWindApp.userId.incrementAndGet();
         this.name = name;
