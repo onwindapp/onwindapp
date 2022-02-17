@@ -38,16 +38,14 @@ public class LoginActivity extends AppCompatActivity {
                 if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
                     Toast.makeText(getApplicationContext(), "Los campos correo y contraseña tienen que ser rellenados", Toast.LENGTH_LONG);
                 }else {
-                    Users temp = new Users(email.getText().toString());
-                    int location = realmUserList.indexOf(temp);
-                    if (location < 0){
+                    Users user = realm.where(Users.class).equalTo("mail", email.getText().toString()).findFirst();
+                    if (user == null){
                         Toast.makeText(getApplicationContext(), "No se hay nadie registrado con ese correo", Toast.LENGTH_LONG);
                     }
                     else {
-                        Users usuario = realm.where(Users.class).equalTo("mail", temp.getMail()).findFirst();
-                        if (usuario.getPassword() == password.getText().toString()){
+                        if (user.getPassword().equals(password.getText().toString())){
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
-                            intent.putExtra("user", usuario.getId());
+                            intent.putExtra("user", user.getId());
                             startActivity(intent);
                         }else {
                             Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_LONG);
