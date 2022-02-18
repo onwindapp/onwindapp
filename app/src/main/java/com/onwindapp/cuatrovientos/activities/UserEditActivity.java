@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -38,7 +39,7 @@ public class UserEditActivity extends AppCompatActivity {
         result = findViewById(R.id.result);
         Bundle bundle = getIntent().getExtras();
         edit = findViewById(R.id.edit);
-        user = realm.where(Users.class).equalTo("id", bundle.getString("user")).findFirst();
+        user = realm.where(Users.class).equalTo("id", CommonData.currentUser.getId()).findFirst();
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -59,8 +60,13 @@ public class UserEditActivity extends AppCompatActivity {
                     user.setTelephone(phone.getText().toString());
                 }
                 realm.commitTransaction();
+                realm.executeTransaction(new Realm.Transaction() {
+                    @Override
+                    public void execute(Realm realm) {
+                        CommonData.currentUser = realm.where(Users.class).equalTo("id", user.getId()).findFirst();
+                    }
+                });
                 Intent intent = new Intent(UserEditActivity.this, UserInfoActivity.class);
-                intent.putExtra("user", bundle.getString("user"));
                 startActivity(intent);
             }
         });

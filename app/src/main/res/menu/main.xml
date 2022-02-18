@@ -4,4 +4,7 @@
     <item android:title="Ranking"
         android:id="@+id/Ranking">
     </item>
+    <item android:title="Usuario"
+        android:id="@+id/User_Info">
+    </item>
 </menu>

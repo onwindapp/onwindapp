@@ -12,6 +12,7 @@ import android.widget.Toast;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -56,8 +57,13 @@ public class RegisterActivity extends AppCompatActivity {
                         realm.beginTransaction();
                         realm.copyToRealm(rookie);
                         realm.commitTransaction();
+                        realm.executeTransaction(new Realm.Transaction() {
+                            @Override
+                            public void execute(Realm realm) {
+                                CommonData.currentUser = realm.where(Users.class).equalTo("id", rookie.getId()).findFirst();
+                            }
+                        });
                         Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
-                        intent.putExtra("user", rookie.getId());
                         startActivity(intent);
                     }
                 }

@@ -27,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
+    Bundle bundle;
     Users pruw;
     Realm realm;
     Boolean realmCleanMode = false;
@@ -36,17 +37,18 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
+        bundle = getIntent().getExtras();
         ddg = new DummyDataGenerator();
 
         realm = Realm.getDefaultInstance();
         // TODO: 15/02/2022 temp
 
-        realm.executeTransaction(new Realm.Transaction() {
+        /*realm.executeTransaction(new Realm.Transaction() {
             @Override
             public void execute(Realm realm) {
                 CommonData.currentUser = realm.where(Users.class).equalTo("mail", "mpuerta@onwind.app").findFirst();
             }
-        });
+        });*/
 
 
         // todo: refactor ralm transctions
@@ -110,6 +112,10 @@ public class MainActivity extends AppCompatActivity {
         //Left this condition in case we want to add more items to the menu
         if (item.getItemId() == R.id.Ranking){
             Intent intent = new Intent(this, RankingActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.User_Info){
+            Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
         }
         return true;

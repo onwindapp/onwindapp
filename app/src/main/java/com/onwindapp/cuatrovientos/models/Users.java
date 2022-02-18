@@ -8,6 +8,7 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class Users extends RealmObject {
+    private static final String clave = "1QqAaZz2WwSsXx3EeDdCc4RrFfVv5TtGgBb6YyHhNn7UuJjMm8IiKk9OoLl0PpÑñ";
     @PrimaryKey
     private int id;
     @Required
@@ -24,7 +25,8 @@ public class Users extends RealmObject {
     private int nbans;
     private String forgivenessdate;
 
-    public Users() {}
+    public Users() {
+    }
 
     public Users(String mail) {
         this.mail = mail;
@@ -34,7 +36,7 @@ public class Users extends RealmObject {
         this.id = OnWindApp.userId.incrementAndGet();
         this.name = name;
         this.surname = surname;
-        this.password = password;
+        this.password = this.encriptar(password);
         this.mail = mail;
         this.telephone = telephone;
         this.punctuation = 0;
@@ -152,5 +154,28 @@ public class Users extends RealmObject {
         int result = id;
         result = 31 * result + mail.hashCode();
         return result;
+    }
+
+    private String encriptar(String plano){
+        String encriptado = "";
+        StringBuilder revers = new StringBuilder(plano);
+        revers.reverse();
+        plano = revers.toString();
+        for (int i = 0; i < plano.length(); i++){
+            int posicion = clave.indexOf(plano.charAt(i));
+            if (posicion >= 0) {
+                encriptado += clave.charAt((posicion + 4) % clave.length());
+            } else {
+                encriptado += plano.charAt(i);
+            }
+        }
+        return encriptado;
+    }
+    public boolean validacion(String intento){
+        if (this.password == this.encriptar(intento)){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

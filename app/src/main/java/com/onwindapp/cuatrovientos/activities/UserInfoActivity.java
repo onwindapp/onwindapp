@@ -11,6 +11,7 @@ import android.widget.TextView;
 
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import io.realm.Realm;
 import io.realm.RealmResults;
@@ -23,7 +24,6 @@ public class UserInfoActivity extends AppCompatActivity {
     TextView puntuacion;
     TextView puntosco2;
     Button edit;
-    Users user;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,17 +37,15 @@ public class UserInfoActivity extends AppCompatActivity {
         puntosco2 = findViewById(R.id.puntosco2);
         Bundle bundle = getIntent().getExtras();
         edit = findViewById(R.id.edit);
-        user = realm.where(Users.class).equalTo("id", bundle.getString("user")).findFirst();
-        name.setText(user.getName()+" "+user.getSurname());
-        mail.setText(user.getMail());
-        phone.setText(user.getTelephone());
-        puntuacion.setText(user.getPunctuation()+"");
-        puntosco2.setText(user.getCO2points()+"");
+        name.setText(CommonData.currentUser.getName()+" "+CommonData.currentUser.getSurname());
+        mail.setText(CommonData.currentUser.getMail());
+        phone.setText(CommonData.currentUser.getTelephone());
+        puntuacion.setText(CommonData.currentUser.getPunctuation()+"");
+        puntosco2.setText(CommonData.currentUser.getCO2points()+"");
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(UserInfoActivity.this, UserEditActivity.class);
-                intent.putExtra("user", bundle.getString("user"));
                 startActivity(intent);
             }
         });
