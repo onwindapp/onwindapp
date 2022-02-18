@@ -15,9 +15,7 @@ import android.view.ViewGroup;
 
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onwindapp.cuatrovientos.R;
-import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
 import com.onwindapp.cuatrovientos.adapters.RidesAdapter;
-import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
 import com.onwindapp.cuatrovientos.maps.MainMapActivity;
 import com.onwindapp.cuatrovientos.maps.RouteActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
@@ -26,7 +24,6 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import io.realm.Realm;
-import io.realm.RealmResults;
 
 public class RidesAvailableFragment extends Fragment {
     //private ArrayList<TripsTesting> trips;

@@ -4,9 +4,11 @@ import android.app.Activity;
 import android.app.DatePickerDialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
+import android.os.Build;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.fragment.app.Fragment;
 
 import android.text.Editable;
@@ -32,7 +34,9 @@ import com.onwindapp.cuatrovientos.models.Users;
 
 import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
+import java.time.Year;
 import java.util.Calendar;
+import java.util.Date;
 
 import io.realm.RealmList;
 
@@ -216,7 +220,7 @@ public class RideCreation1Fragment extends Fragment {
 
 
     private void showDateDialog(final EditText date_in) {
-        final Calendar calendar=Calendar.getInstance();
+        final Calendar calendar = Calendar.getInstance();
         DatePickerDialog.OnDateSetListener dateSetListener = new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker view, int year, int month, int dayOfMonth) {
@@ -227,8 +231,8 @@ public class RideCreation1Fragment extends Fragment {
                 date_in.setText(simpleDateFormat.format(calendar.getTime()));
 
             }
-        };
-        new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.DAY_OF_MONTH),calendar.get(Calendar.MONTH),calendar.get(Calendar.YEAR)).show();
+        };Calendar.getInstance().get(Calendar.YEAR);
+        new DatePickerDialog(getActivity(),dateSetListener,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
     }
 
     public interface onSomeEventListener {
