@@ -34,6 +34,7 @@ import com.onwindapp.cuatrovientos.BuildConfig;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.util.ArrayList;
 
@@ -55,9 +56,9 @@ public class RouteMapsFragment extends Fragment {
                 LatLng destination;
                 if (ride.getRideType().equals(RidesTypes.Ida)) {
                     origin = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
-                    destination = new LatLng(42.824501, -1.659990);
+                    destination = CommonData.cuatrovientos;
                 } else {
-                    origin = new LatLng(42.824501, -1.659990);
+                    origin = CommonData.cuatrovientos;
                     destination = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
                 }
                 mMap.addMarker(new MarkerOptions().position(origin).title("Inicio"));

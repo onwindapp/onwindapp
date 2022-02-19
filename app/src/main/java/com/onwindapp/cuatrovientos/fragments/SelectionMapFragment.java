@@ -13,23 +13,34 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.onwindapp.cuatrovientos.R;
+import com.onwindapp.cuatrovientos.models.Ride;
+import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
 public class SelectionMapFragment extends Fragment {
     private GoogleMap mMap;
+    private Ride ride;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
 
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
-
-            mMap.addMarker(CommonData.defaultMarker.draggable(true));
+            // draggable marker
+            mMap.addMarker(CommonData.defaultMarker
+                    .draggable(true)
+                    .icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                    :
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+            // target marker
+            mMap.addMarker((ride.getRideType().equals(RidesTypes.Ida) ? CommonData.c)
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(CommonData.defaultLoc)
                     .zoom(11)
@@ -52,6 +63,7 @@ public class SelectionMapFragment extends Fragment {
 
                 }
             });
+
         }
     };
 
@@ -71,5 +83,8 @@ public class SelectionMapFragment extends Fragment {
         if (mapFragment != null) {
             mapFragment.getMapAsync(callback);
         }
+    }
+    public void LoadData(Ride ride) {
+        this.ride = ride;
     }
 }
