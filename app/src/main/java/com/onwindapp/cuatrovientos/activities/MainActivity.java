@@ -47,11 +47,11 @@ public class MainActivity extends AppCompatActivity {
         realm = Realm.getDefaultInstance();
 
         // TODO: 15/02/2022 temp
-        realm.executeTransaction(realm -> {
-            CommonData.currentUser = realm.where(Users.class)
-                    .equalTo("mail", "mpuerta@onwind.app")
-                    .findFirst();
-        });
+//        realm.executeTransaction(realm -> {
+//            CommonData.currentUser = realm.where(Users.class)
+//                    .equalTo("mail", "mpuerta@onwind.app")
+//                    .findFirst();
+//        });
 
 
         // todo: refactor ralm transctions
@@ -143,13 +143,12 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
         if (item.getItemId() == R.id.EditarPerfil) {
-            // todo refactor,
             Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.Salir) {
-            // todo refactor,
-            Intent intent = new Intent(this, RankingActivity.class);
+            Intent intent = new Intent(this, LoginActivity.class);
+            CommonData.currentUser = null;
             startActivity(intent);
         }
 

@@ -31,12 +31,11 @@ public class UserInfoActivity extends AppCompatActivity {
         setContentView(R.layout.activity_user_info);
         realm = Realm.getDefaultInstance();
         name = findViewById(R.id.name);
-        mail = findViewById(R.id.email);
+        mail = findViewById(R.id.mail);
         phone = findViewById(R.id.phone);
         puntuacion = findViewById(R.id.puntucion);
         puntosco2 = findViewById(R.id.puntosco2);
-        Bundle bundle = getIntent().getExtras();
-        edit = findViewById(R.id.edit);
+        edit = findViewById(R.id.btnEditarRe);
         name.setText(CommonData.currentUser.getName()+" "+CommonData.currentUser.getSurname());
         mail.setText(CommonData.currentUser.getMail());
         phone.setText(CommonData.currentUser.getTelephone());

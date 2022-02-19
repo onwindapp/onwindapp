@@ -37,11 +37,11 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (email.getText().toString().isEmpty() || password.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Los campos correo y contraseña tienen que ser rellenados", Toast.LENGTH_LONG);
+                    Toast.makeText(LoginActivity.this, "Los campos correo y contraseña tienen que ser rellenados", Toast.LENGTH_LONG).show();
                 }else {
                     Users user = realm.where(Users.class).equalTo("mail", email.getText().toString()).findFirst();
                     if (user == null){
-                        Toast.makeText(getApplicationContext(), "No se hay nadie registrado con ese correo", Toast.LENGTH_LONG);
+                        Toast.makeText(LoginActivity.this, "No se hay nadie registrado con ese correo", Toast.LENGTH_LONG).show();
                     }
                     else {
                         if (user.validacion(password.getText().toString())){
@@ -54,7 +54,7 @@ public class LoginActivity extends AppCompatActivity {
                             Intent intent = new Intent(LoginActivity.this, MainActivity.class);
                             startActivity(intent);
                         }else {
-                            Toast.makeText(getApplicationContext(), "Contraseña incorrecta", Toast.LENGTH_LONG);
+                            Toast.makeText(LoginActivity.this, "Contraseña incorrecta", Toast.LENGTH_SHORT).show();
                         }
                     }
                 }

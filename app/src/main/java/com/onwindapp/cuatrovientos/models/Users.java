@@ -172,10 +172,6 @@ public class Users extends RealmObject {
         return encriptado;
     }
     public boolean validacion(String intento){
-        if (this.password == this.encriptar(intento)){
-            return true;
-        }else {
-            return false;
-        }
+        return this.password.equals(this.encriptar(intento));
     }
 }
