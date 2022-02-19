@@ -17,6 +17,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -31,6 +32,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
@@ -46,12 +48,13 @@ public class RideCreation1Fragment extends Fragment {
     EditText date, time, place, details;
     TextView cPlace, cDetails, cDate, cTime, globalErrorNote;
     Switch type;
+    Spinner seatsAvailable;
     public RideCreation1Fragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_creation1, container, false);
-        Spinner seatsAvailable = (Spinner) view.findViewById(R.id.seatsAvailable);
+        seatsAvailable = (Spinner) view.findViewById(R.id.seatsAvailable);
         time = (EditText) view.findViewById(R.id.timeSelector);
         date = (EditText) view.findViewById(R.id.dateselector);
         place = (EditText) view.findViewById(R.id.place);
@@ -108,6 +111,16 @@ public class RideCreation1Fragment extends Fragment {
             }
         });
 
+        type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
+            }
+        });
+
         place.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -116,6 +129,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cPlace.setVisibility(View.INVISIBLE);
                 if (cDetails.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -134,6 +151,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cDetails.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -152,6 +173,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cDate.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDetails.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -170,6 +195,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cTime.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDetails.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -198,6 +227,7 @@ public class RideCreation1Fragment extends Fragment {
         seatsAvailableAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         seatsAvailableAdapter.notifyDataSetChanged();
         seatsAvailable.setAdapter(seatsAvailableAdapter);
+
 
         return view;
     }
@@ -237,6 +267,7 @@ public class RideCreation1Fragment extends Fragment {
 
     public interface onSomeEventListener {
         public void someEvent(Ride ride);
+        public void hideNextButton(Boolean hide);
     }
 
     onSomeEventListener someEventListener;
@@ -249,5 +280,25 @@ public class RideCreation1Fragment extends Fragment {
         } catch (ClassCastException e) {
             throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
         }
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        seatsAvailable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {
+                // your code here
+            }
+
+        });
     }
 }

@@ -112,8 +112,16 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     }
     @Override
     public void someEvent(Ride ride) {
-        this.tmpRide = ride;
+        CommonData.createRide = ride;
         if (ride == null){
+            btnNext.setVisibility(View.INVISIBLE);
+        } else {
+            btnNext.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void hideNextButton(Boolean hide) {
+        if (hide){
             btnNext.setVisibility(View.INVISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
