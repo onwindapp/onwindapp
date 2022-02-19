@@ -2,6 +2,10 @@ package com.onwindapp.cuatrovientos.models;
 
 import com.onwindapp.cuatrovientos.app.OnWindApp;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -157,19 +161,20 @@ public class Users extends RealmObject {
     }
 
     private String encriptar(String plano){
-        String encriptado = "";
-        StringBuilder revers = new StringBuilder(plano);
-        revers.reverse();
-        plano = revers.toString();
-        for (int i = 0; i < plano.length(); i++){
-            int posicion = clave.indexOf(plano.charAt(i));
-            if (posicion >= 0) {
-                encriptado += clave.charAt((posicion + 4) % clave.length());
-            } else {
-                encriptado += plano.charAt(i);
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update("HolaSoyLaSalXD".getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = md.digest(plano.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
             }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
         }
-        return encriptado;
+        return generatedPassword;
     }
     public boolean validacion(String intento){
         return this.password.equals(this.encriptar(intento));
