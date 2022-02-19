@@ -30,6 +30,8 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
+    Bundle bundle;
+    Users pruw;
     Realm realm;
     FloatingActionButton fabActions;
     Boolean realmCleanMode = false;
@@ -39,6 +41,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
+        bundle = getIntent().getExtras();
         ddg = new DummyDataGenerator();
         fabActions = (FloatingActionButton) findViewById(R.id.fabActions);
         realm = Realm.getDefaultInstance();
@@ -60,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         realmUsers = realm.where(Users.class).findAll();
         realmRides = realm.where(Ride.class).findAll();
 
-        if (realmUsers.size() == 0){
+        /*if (realmUsers.size() == 0){
             realm.beginTransaction();
             realm.copyToRealm(ddg.createUsers());
             realm.commitTransaction();
@@ -69,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             realm.beginTransaction();
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
-        }
+        }*/
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
@@ -141,7 +144,7 @@ public class MainActivity extends AppCompatActivity {
         }
         if (item.getItemId() == R.id.EditarPerfil) {
             // todo refactor,
-            Intent intent = new Intent(this, RankingActivity.class);
+            Intent intent = new Intent(this, UserInfoActivity.class);
             startActivity(intent);
         }
         if (item.getItemId() == R.id.Salir) {
