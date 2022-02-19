@@ -27,8 +27,6 @@ public class SelectionMapFragment extends Fragment {
     private GoogleMap mMap;
     private Ride ride;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
@@ -82,6 +80,7 @@ public class SelectionMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        ride = CommonData.createRide;
         return inflater.inflate(R.layout.fragment_selection_map, container, false);
     }
 
@@ -94,7 +93,5 @@ public class SelectionMapFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
-    public void LoadData(Ride ride) {
-        this.ride = ride;
-    }
+
 }

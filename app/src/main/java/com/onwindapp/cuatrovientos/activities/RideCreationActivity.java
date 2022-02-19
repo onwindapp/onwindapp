@@ -125,8 +125,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             btnNext.setVisibility(View.INVISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
-            // send ride to Selection Frag
-
+            CommonData.createRide = ride;
         }
     }
 }
