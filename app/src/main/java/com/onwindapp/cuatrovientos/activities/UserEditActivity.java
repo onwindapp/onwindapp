@@ -40,6 +40,12 @@ public class UserEditActivity extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         edit = findViewById(R.id.edit);
         user = realm.where(Users.class).equalTo("id", CommonData.currentUser.getId()).findFirst();
+        //load data of the user
+        name.setText(user.getName());
+        surname.setText(user.getSurname());
+        mail.setText(user.getMail());
+        mail.setEnabled(false);
+        phone.setText(user.getTelephone());
         edit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -53,9 +59,9 @@ public class UserEditActivity extends AppCompatActivity {
                 if (!mail.getText().toString().isEmpty()){
                     user.setMail(mail.getText().toString());
                 }
-                if (!password.getText().toString().isEmpty()){
-                    user.setPassword(password.getText().toString());
-                }
+//                if (!password.getText().toString().isEmpty()){
+//                    user.setPassword(password.getText().toString());
+//                }
                 if (!phone.getText().toString().isEmpty()){
                     user.setTelephone(phone.getText().toString());
                 }

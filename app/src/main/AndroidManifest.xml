@@ -14,10 +14,11 @@
         android:theme="@style/Theme.Onwindapp">
         <activity
             android:name=".activities.UserInfoActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:exported="false" />
         <activity
             android:name=".activities.UserEditActivity"
-            android:parentActivityName=".activities.MainActivity"
+            android:parentActivityName=".activities.UserInfoActivity"
             android:exported="false" />
         <activity
             android:name=".activities.RegisterActivity"
