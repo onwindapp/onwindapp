@@ -8,14 +8,14 @@
     android:background="@color/ow_blue">
 
     <androidx.viewpager2.widget.ViewPager2
-        android:id="@+id/view_pager_ride_creation"
-        android:layout_width="match_parent"
-        android:layout_height="554dp"
-        android:layout_marginTop="4dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+            android:id="@+id/view_pager_ride_creation"
+            android:layout_width="match_parent"
+            android:layout_height="554dp"
+            android:layout_marginTop="4dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
         android:id="@+id/dotsLayout"

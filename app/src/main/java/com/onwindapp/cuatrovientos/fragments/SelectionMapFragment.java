@@ -39,8 +39,18 @@ public class SelectionMapFragment extends Fragment {
                     BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
                     :
                     BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
-            // target marker
-            mMap.addMarker((ride.getRideType().equals(RidesTypes.Ida) ? CommonData.c)
+            // target marker, Cuatrovientos
+            mMap.addMarker(new MarkerOptions()
+                    .position(CommonData.cuatrovientos)
+                    .icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                            :
+                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                    .title(ride.getRideType().equals(RidesTypes.Ida) ?
+                            "Destino" : "Salida")
+            );
+
+
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(CommonData.defaultLoc)
                     .zoom(11)

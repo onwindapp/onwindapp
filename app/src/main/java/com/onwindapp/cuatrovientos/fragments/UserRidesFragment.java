@@ -34,7 +34,6 @@ public class UserRidesFragment extends Fragment {
     RealmResults<Ride> rides;
     Realm realm;
     Users loggedUser;
-    FloatingActionButton fabUser;
     public UserRidesFragment() {}
 
     @RequiresApi(api = Build.VERSION_CODES.N)
@@ -43,7 +42,6 @@ public class UserRidesFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_user_rides, container, false);
         MainActivity activity = (MainActivity) getActivity();
 //        String loggedUserEmail = activity.getLoggedUserId();
-        fabUser = (FloatingActionButton) view.findViewById(R.id.fabAllPoints);
 
         realm = Realm.getDefaultInstance();
 //        loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
@@ -69,13 +67,6 @@ public class UserRidesFragment extends Fragment {
             });
         }
 
-        fabUser.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(getContext(), RideCreationActivity.class);
-                startActivity(intent);
-            }
-        });
         return view;
     }
 }

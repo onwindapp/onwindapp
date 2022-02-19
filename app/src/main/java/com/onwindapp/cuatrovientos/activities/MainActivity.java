@@ -8,10 +8,13 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
+import com.onwindapp.cuatrovientos.maps.MainMapActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
 import com.onwindapp.cuatrovientos.utils.CommonData;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Realm realm;
+    FloatingActionButton fabActions;
     Boolean realmCleanMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
         ddg = new DummyDataGenerator();
-
+        fabActions = (FloatingActionButton) findViewById(R.id.fabActions);
         realm = Realm.getDefaultInstance();
 
         // TODO: 15/02/2022 temp
@@ -88,11 +92,36 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (position == 1) {
+                    fabActions.setImageDrawable(getDrawable(R.drawable.ic_map_svgrepo_com));
+                   fabActions.setOnClickListener(v -> {
+                       Intent intent = new Intent(MainActivity.this, MainMapActivity.class);
+                       startActivity(intent);
+                   });
+
+                } else {
+                    fabActions.setImageDrawable(getDrawable(R.drawable.ic_add_svgrepo_com));
+                    fabActions.setOnClickListener(v -> {
+                        Intent intent = new Intent(MainActivity.this, RideCreationActivity.class);
+                        startActivity(intent);
+                    });
+
+                }
+            }
+        });
+
+
+
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position){
                 tablayout.selectTab(tablayout.getTabAt(position));
+
             }
         });
     }
