@@ -13,10 +13,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
+import com.onwindapp.cuatrovientos.activities.RideCreationActivity;
 import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
 import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
+import com.onwindapp.cuatrovientos.maps.MainMapActivity;
 import com.onwindapp.cuatrovientos.maps.RouteActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
@@ -33,12 +36,16 @@ public class UserRidesFragment extends Fragment {
     RealmResults<Ride> rides;
     Realm realm;
     Users loggedUser;
+    FloatingActionButton fabUser;
     public UserRidesFragment() {}
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_rides, container, false);
+        MainActivity activity = (MainActivity) getActivity();
+//        String loggedUserEmail = activity.getLoggedUserId();
+        fabUser = (FloatingActionButton) view.findViewById(R.id.fabAllPoints);
 
         realm = Realm.getDefaultInstance();
 //        loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
@@ -63,6 +70,14 @@ public class UserRidesFragment extends Fragment {
                 }
             });
         }
+
+        fabUser.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getContext(), RideCreationActivity.class);
+                startActivity(intent);
+            }
+        });
         return view;
     }
 }
