@@ -13,23 +13,42 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.Marker;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.onwindapp.cuatrovientos.R;
+import com.onwindapp.cuatrovientos.models.Ride;
+import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
 public class SelectionMapFragment extends Fragment {
     private GoogleMap mMap;
+    private Ride ride;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
-
-
         @Override
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
+            // draggable marker
+            mMap.addMarker(CommonData.defaultMarker
+                    .draggable(true)
+                    .icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                    :
+                    BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+            // target marker, Cuatrovientos
+            mMap.addMarker(new MarkerOptions()
+                    .position(CommonData.cuatrovientos)
+                    .icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                            :
+                            BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))
+                    .title(ride.getRideType().equals(RidesTypes.Ida) ?
+                            "Destino" : "Salida")
+            );
 
-            mMap.addMarker(CommonData.defaultMarker.draggable(true));
+
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(CommonData.defaultLoc)
                     .zoom(11)
@@ -52,6 +71,7 @@ public class SelectionMapFragment extends Fragment {
 
                 }
             });
+
         }
     };
 
@@ -60,6 +80,7 @@ public class SelectionMapFragment extends Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater,
                              @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
+        ride = CommonData.createRide;
         return inflater.inflate(R.layout.fragment_selection_map, container, false);
     }
 
@@ -72,4 +93,5 @@ public class SelectionMapFragment extends Fragment {
             mapFragment.getMapAsync(callback);
         }
     }
+
 }

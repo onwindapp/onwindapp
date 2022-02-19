@@ -26,11 +26,13 @@
             android:name="com.google.android.geo.API_KEY"
             android:value="${MAPS_API_KEY}" />
 
+        <!--        <activity-->
+        <!--            android:name=".maps.SelectionMapActivity"-->
+        <!--            android:exported="false"-->
+        <!--            android:label="@string/title_activity_selection_map" />-->
         <activity
-            android:name=".maps.RouteActivity"
-            android:exported="false"
-            android:parentActivityName=".activities.MainActivity" />
-        <activity
+            android:name=".activities.LoginActivity"
+
             android:name=".maps.MainMapActivity"
             android:exported="false"
             android:label="@string/title_activity_main_map"
@@ -40,7 +42,18 @@
             android:exported="true"
             android:parentActivityName=".activities.MainActivity" />
         <activity
-            android:name=".activities.LoginActivity"
+            android:name=".maps.RouteActivity"
+            android:exported="true"
+            android:parentActivityName=".activities.MainActivity" />
+
+
+        <activity
+            android:name=".activities.RideCreationActivity"
+            android:exported="true"
+            android:windowSoftInputMode="adjustPan"
+            android:parentActivityName=".activities.MainActivity" />
+        <activity
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

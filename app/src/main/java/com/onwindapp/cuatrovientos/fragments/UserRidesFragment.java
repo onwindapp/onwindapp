@@ -13,9 +13,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
-import com.onwindapp.cuatrovientos.activities.RideDetailsActivity;
+import com.onwindapp.cuatrovientos.activities.RideCreationActivity;
 import com.onwindapp.cuatrovientos.adapters.UserRidesAdapter;
 import com.onwindapp.cuatrovientos.maps.RouteActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
@@ -39,6 +40,8 @@ public class UserRidesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_user_rides, container, false);
+        MainActivity activity = (MainActivity) getActivity();
+//        String loggedUserEmail = activity.getLoggedUserId();
 
         realm = Realm.getDefaultInstance();
 //        loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
@@ -63,6 +66,7 @@ public class UserRidesFragment extends Fragment {
                 }
             });
         }
+
         return view;
     }
 }
