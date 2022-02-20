@@ -48,6 +48,7 @@ public class RideCreation1Fragment extends Fragment {
     EditText date, time, place, details;
     TextView cPlace, cDetails, cDate, cTime, globalErrorNote;
     Switch type;
+    ArrayAdapter<String> seatsAvailableAdapter;
     Spinner seatsAvailable;
     public RideCreation1Fragment() { }
 
@@ -68,6 +69,9 @@ public class RideCreation1Fragment extends Fragment {
         type = (Switch) view.findViewById(R.id.type);
         date.setInputType(InputType.TYPE_NULL);
         time.setInputType(InputType.TYPE_NULL);
+
+
+
 
         chkAccept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -222,7 +226,7 @@ public class RideCreation1Fragment extends Fragment {
                 showDateDialog(date);
             }
         });
-        ArrayAdapter<String> seatsAvailableAdapter = new ArrayAdapter<String>(getActivity(),
+        seatsAvailableAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_expandable_list_item_1, getResources().getStringArray(R.array.seats));
         seatsAvailableAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         seatsAvailableAdapter.notifyDataSetChanged();
@@ -285,6 +289,7 @@ public class RideCreation1Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
+
         seatsAvailable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
@@ -300,5 +305,17 @@ public class RideCreation1Fragment extends Fragment {
             }
 
         });
+        if (CommonData.editMode == Boolean.TRUE){
+            place.setText(CommonData.editRide.getName());
+            details.setText(CommonData.editRide.getDescription());
+            String[]dateTime = CommonData.editRide.getDateTime().split(" ");
+            date.setText(dateTime[0]);
+            time.setText(dateTime[1]);
+            seatsAvailable.setSelection(CommonData.editRide.getAvailablePlaces() - 1);
+            if (CommonData.editRide.getRideType().toString().equals("Vuelta")) type.toggle();
+            CommonData.editMode = Boolean.FALSE;
+        }
     }
+
+
 }

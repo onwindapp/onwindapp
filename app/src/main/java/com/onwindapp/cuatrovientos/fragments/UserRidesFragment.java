@@ -77,7 +77,7 @@ public class UserRidesFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(getContext(), RideCreationActivity.class);
-                intent.putExtra("id", -1);
+                intent.putExtra("id", "-1");
                 startActivity(intent);
             }
         });

@@ -66,7 +66,7 @@ public class RouteActivity extends AppCompatActivity {
             btnTerminarViaje.setVisibility(View.VISIBLE);
             btnEditar.setOnClickListener(v -> {
                 Intent intent = new Intent(RouteActivity.this, RideCreationActivity.class);
-                intent.putExtra("id", Integer.toString(ride.getId()));
+                intent.putExtra("id", Integer.toString(ride.getId()));//
                 startActivity(intent);
             });
             btnTerminarViaje.setOnClickListener(v ->{

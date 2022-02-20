@@ -24,6 +24,7 @@ import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.onSomeEventListener {
     ViewPager2 pager;
@@ -34,11 +35,10 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     Button btnNext, btnBack;
     Boolean readyToConfirm = Boolean.FALSE;
     String markerInfo;
-    Ride tmpRide;
+    Ride tmpRide, rideToEdit;
     String data;
     Realm realm;
-    Boolean editMode = Boolean.FALSE;
-    int nCurrentPage;
+    int nCurrentPage, numb;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,11 +48,23 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         btnNext = (Button) findViewById(R.id.next);
         btnBack = (Button) findViewById(R.id.back);
 
-        Bundle bundle = getIntent().getExtras();
-        if (bundle.getInt("id") != -1){
-            editMode = Boolean.TRUE;
+        Intent i = getIntent();
+        String str = i.getStringExtra("id");
+        int id = Integer.parseInt(str);
+        if (id != -1){
+            CommonData.editMode = Boolean.TRUE;
             realm = Realm.getDefaultInstance();
-            CommonData.editRide = realm.where(Ride.class).equalTo("id", bundle.getInt("id")).findFirst();
+
+            realm.executeTransaction(realm -> rideToEdit = realm.where(Ride.class).equalTo("id", id).findFirst());
+            CommonData.editRide.setId(rideToEdit.getId());
+            CommonData.editRide.setName(rideToEdit.getName());
+            CommonData.editRide.setDescription(rideToEdit.getDescription());
+            CommonData.editRide.setPoint(rideToEdit.getPoint());
+            CommonData.editRide.setDateTime(rideToEdit.getDateTime());
+            CommonData.editRide.setDriver(rideToEdit.getDriver());
+            CommonData.editRide.setAvailablePlaces(rideToEdit.getAvailablePlaces());
+            CommonData.editRide.setRideType(rideToEdit.getRideType());
+            CommonData.editRide.setUsersJoined(rideToEdit.getUsersJoined());
         }
 
         FragmentManager fm = getSupportFragmentManager();
@@ -66,7 +78,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             public void onClick(View v) {
                 pager.setCurrentItem(nCurrentPage + 1);
                 if (readyToConfirm == Boolean.TRUE) {
-                    if (editMode == Boolean.FALSE){
+                    if (CommonData.editMode == Boolean.FALSE){
                         realm = Realm.getDefaultInstance();
                         CommonData.createRide.setDriver(CommonData.currentUser);
                         realm.beginTransaction();

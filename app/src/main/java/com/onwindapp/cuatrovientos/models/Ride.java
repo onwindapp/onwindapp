@@ -45,6 +45,18 @@ public class Ride extends RealmObject {
         this.description = "ddd";
     }
 
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public void setRideType(RidesTypes ridesTypes) {
+        this.ridesTypes = this.saveRideType(ridesTypes);
+    }
+
+    public void setAvailablePlaces(int availablePlaces) {
+        this.availablePlaces = availablePlaces;
+    }
+
     @PrimaryKey
     private int id;
 
@@ -92,7 +104,7 @@ public class Ride extends RealmObject {
         return this.id;
     }
     public RidesTypes getRideType() {
-        return RidesTypes.valueOf(ridesTypes);
+        return RidesTypes.valueOf(this.ridesTypes);
     }
     public String saveRideType (RidesTypes rideType) {
         return rideType.toString();

@@ -14,4 +14,6 @@ public class CommonData {
 
     static public Ride createRide = new Ride();
     static public Ride editRide = new Ride();
+
+    static public Boolean editMode = Boolean.FALSE;
 }
