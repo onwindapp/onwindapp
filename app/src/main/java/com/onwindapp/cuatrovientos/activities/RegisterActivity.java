@@ -46,12 +46,11 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (name.getText().toString().isEmpty()||surname.getText().toString().isEmpty()||mail.getText().toString().isEmpty()||password.getText().toString().isEmpty()||phone.getText().toString().isEmpty()){
-                    Toast.makeText(getApplicationContext(), "Complete todos los campos para poder registrarte", Toast.LENGTH_LONG);
+                    Toast.makeText(RegisterActivity.this, "Complete todos los campos para poder registrarte", Toast.LENGTH_LONG).show();
                 }else {
                     Users rookie = new Users(name.getText().toString(), surname.getText().toString(), password.getText().toString(), mail.getText().toString(), phone.getText().toString());
-                    int location = realmUserList.indexOf(rookie);
-                    if (location > -1){
-                        Toast.makeText(getApplicationContext(), "Este correo ya está registrado", Toast.LENGTH_LONG);
+                    if (realm.where(Users.class).equalTo("mail", mail.getText().toString()).findFirst() != null){
+                        Toast.makeText(RegisterActivity.this, "Este correo ya está registrado", Toast.LENGTH_LONG).show();
                     }
                     else {
                         realm.beginTransaction();
