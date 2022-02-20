@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.activities.MainActivity;
+import com.onwindapp.cuatrovientos.activities.RideCreationActivity;
 import com.onwindapp.cuatrovientos.fragments.RouteMapsFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.utils.CommonData;
@@ -64,7 +65,8 @@ public class RouteActivity extends AppCompatActivity {
             btnEditar.setVisibility(View.VISIBLE);
             btnTerminarViaje.setVisibility(View.VISIBLE);
             btnEditar.setOnClickListener(v -> {
-                Intent intent = new Intent(RouteActivity.this, MainActivity.class);
+                Intent intent = new Intent(RouteActivity.this, RideCreationActivity.class);
+                intent.putExtra("id", Integer.toString(ride.getId()));
                 startActivity(intent);
             });
             btnTerminarViaje.setOnClickListener(v ->{

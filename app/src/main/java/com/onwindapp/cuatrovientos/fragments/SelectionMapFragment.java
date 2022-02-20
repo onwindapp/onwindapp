@@ -20,6 +20,8 @@ import com.google.android.gms.maps.model.MarkerOptions;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
+import io.realm.RealmList;
+
 public class SelectionMapFragment extends Fragment {
     private GoogleMap mMap;
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
@@ -44,7 +46,10 @@ public class SelectionMapFragment extends Fragment {
 
                 @Override
                 public void onMarkerDragEnd(@NonNull Marker marker) {
-                    CommonData.selectedPosition = marker.getPosition();
+                    RealmList<Double> initCords = new RealmList<Double>();
+                    initCords.add(marker.getPosition().latitude);
+                    initCords.add(marker.getPosition().longitude);
+                    CommonData.createRide.setPoint(initCords);
                 }
 
                 @Override

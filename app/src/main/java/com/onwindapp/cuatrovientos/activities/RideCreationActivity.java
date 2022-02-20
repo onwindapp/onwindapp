@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -19,6 +23,8 @@ import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
+import io.realm.Realm;
+
 public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.onSomeEventListener {
     ViewPager2 pager;
     RideCreationAdapter adapter;
@@ -30,6 +36,8 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     String markerInfo;
     Ride tmpRide;
     String data;
+    Realm realm;
+    Boolean editMode = Boolean.FALSE;
     int nCurrentPage;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,20 +48,37 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         btnNext = (Button) findViewById(R.id.next);
         btnBack = (Button) findViewById(R.id.back);
 
+        Bundle bundle = getIntent().getExtras();
+        if (bundle.getInt("id") != -1){
+            editMode = Boolean.TRUE;
+            realm = Realm.getDefaultInstance();
+            CommonData.editRide = realm.where(Ride.class).equalTo("id", bundle.getInt("id")).findFirst();
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         adapter = new RideCreationAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
         pager.setUserInputEnabled(false);
         addDotsIndicator(0);
 
-
-
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 pager.setCurrentItem(nCurrentPage + 1);
                 if (readyToConfirm == Boolean.TRUE) {
-                    Toast.makeText(getApplicationContext(), "Confirmado",Toast.LENGTH_SHORT).show();
+                    if (editMode == Boolean.FALSE){
+                        realm = Realm.getDefaultInstance();
+                        CommonData.createRide.setDriver(CommonData.currentUser);
+                        realm.beginTransaction();
+                        realm.copyToRealm(CommonData.createRide);
+                        realm.commitTransaction();
+                        Toast.makeText(getApplicationContext(), "Viaje creado",Toast.LENGTH_SHORT).show();
+                    } else {
+                        realm = Realm.getDefaultInstance();
+                    }
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
                 if (btnNext.getText() == "Confirmar") readyToConfirm = Boolean.TRUE;
             }

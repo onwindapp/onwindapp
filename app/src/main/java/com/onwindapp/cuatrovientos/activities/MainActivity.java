@@ -39,14 +39,6 @@ public class MainActivity extends AppCompatActivity {
 
         realm = Realm.getDefaultInstance();
 
-        // TODO: 15/02/2022 temp
-        realm.executeTransaction(realm -> {
-            CommonData.currentUser = realm.where(Users.class)
-                    .equalTo("mail", "mpuerta@onwind.app")
-                    .findFirst();
-        });
-
-
         // todo: refactor ralm transctions
         if (realmCleanMode){
             realm.beginTransaction();
@@ -66,6 +58,13 @@ public class MainActivity extends AppCompatActivity {
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
         }
+
+        // TODO: 15/02/2022 temp
+        realm.executeTransaction(realm -> {
+            CommonData.currentUser = realm.where(Users.class)
+                    .equalTo("mail", "mpuerta@onwind.app")
+                    .findFirst();
+        });
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());

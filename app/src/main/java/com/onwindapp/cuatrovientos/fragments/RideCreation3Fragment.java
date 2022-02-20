@@ -15,7 +15,7 @@ import com.onwindapp.cuatrovientos.utils.CommonData;
 public class RideCreation3Fragment extends Fragment {
 
     public RideCreation3Fragment() {}
-    TextView txt3, name, details, date, seats;
+    TextView txt3, name, details, date, seats, type;
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_creation3, container, false);
@@ -24,16 +24,18 @@ public class RideCreation3Fragment extends Fragment {
         details = (TextView) view.findViewById(R.id.detailsfrag3);
         date = (TextView) view.findViewById(R.id.datefrag3);
         seats = (TextView) view.findViewById(R.id.seatsfrag3);
+        type = (TextView) view.findViewById(R.id.typefrag3);
         return view;
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        txt3.setText(CommonData.selectedPosition.toString());
+        txt3.setText(CommonData.createRide.getPoint().toString());
         name.setText(CommonData.createRide.getName());
         details.setText(CommonData.createRide.getDescription());
         date.setText(CommonData.createRide.getDateTime());
         seats.setText(Integer.toString(CommonData.createRide.getAvailablePlaces()));
+        type.setText(CommonData.createRide.getRideType().toString());
     }
 }

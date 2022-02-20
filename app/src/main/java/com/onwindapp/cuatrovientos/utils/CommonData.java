@@ -13,4 +13,5 @@ public class CommonData {
     static public LatLng selectedPosition = new LatLng(0,0);
 
     static public Ride createRide = new Ride();
+    static public Ride editRide = new Ride();
 }
