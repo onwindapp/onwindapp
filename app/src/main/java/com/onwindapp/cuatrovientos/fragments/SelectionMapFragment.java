@@ -31,7 +31,7 @@ public class SelectionMapFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
 
-            mMap.addMarker(CommonData.defaultMarker.draggable(true));
+            mMap.addMarker(CommonData.editMode ? new MarkerOptions().position(new LatLng(CommonData.editRide.getPoint().get(0), CommonData.editRide.getPoint().get(1))).draggable(true) : CommonData.defaultMarker.draggable(true));
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(CommonData.defaultLoc)
                     .zoom(11)

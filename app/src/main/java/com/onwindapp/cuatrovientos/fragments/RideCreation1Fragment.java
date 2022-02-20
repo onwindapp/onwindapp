@@ -46,10 +46,11 @@ public class RideCreation1Fragment extends Fragment {
     private Ride ride;
     private CheckBox chkAccept;
     EditText date, time, place, details;
-    TextView cPlace, cDetails, cDate, cTime, globalErrorNote;
+    TextView cPlace, cDetails, cDate, cTime, globalErrorNote, title;
     Switch type;
     ArrayAdapter<String> seatsAvailableAdapter;
     Spinner seatsAvailable;
+    Boolean dataLoaded = Boolean.FALSE;
     public RideCreation1Fragment() { }
 
     @Override
@@ -59,6 +60,7 @@ public class RideCreation1Fragment extends Fragment {
         time = (EditText) view.findViewById(R.id.timeSelector);
         date = (EditText) view.findViewById(R.id.dateselector);
         place = (EditText) view.findViewById(R.id.place);
+        title = (TextView) view.findViewById(R.id.title);
         cPlace = (TextView) view.findViewById(R.id.checkPlace);
         cDetails = (TextView) view.findViewById(R.id.checkDetails);
         cDate = (TextView) view.findViewById(R.id.checkDate);
@@ -298,14 +300,11 @@ public class RideCreation1Fragment extends Fragment {
                     chkAccept.toggle();
                 }
             }
-
             @Override
-            public void onNothingSelected(AdapterView<?> parentView) {
-                // your code here
-            }
-
+            public void onNothingSelected(AdapterView<?> parentView) {}
         });
-        if (CommonData.editMode == Boolean.TRUE){
+        if (CommonData.editMode == Boolean.TRUE && dataLoaded == Boolean.FALSE){
+            title.setText("Editar Viaje");
             place.setText(CommonData.editRide.getName());
             details.setText(CommonData.editRide.getDescription());
             String[]dateTime = CommonData.editRide.getDateTime().split(" ");
@@ -313,7 +312,7 @@ public class RideCreation1Fragment extends Fragment {
             time.setText(dateTime[1]);
             seatsAvailable.setSelection(CommonData.editRide.getAvailablePlaces() - 1);
             if (CommonData.editRide.getRideType().toString().equals("Vuelta")) type.toggle();
-            CommonData.editMode = Boolean.FALSE;
+            dataLoaded = Boolean.TRUE;
         }
     }
 

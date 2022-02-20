@@ -164,4 +164,10 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             btnNext.setVisibility(View.VISIBLE);
         }
     }
+
+    public void onDestroy() {
+        super.onDestroy();
+        CommonData.editMode =  Boolean.FALSE;
+        finish();
+    }
 }
