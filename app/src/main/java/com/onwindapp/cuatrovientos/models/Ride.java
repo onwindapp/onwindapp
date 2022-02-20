@@ -11,29 +11,38 @@ public class Ride extends RealmObject {
 
     public Ride () {}
 
-    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String meetHour, Users driver, RealmList<Users> usersJoined) {
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String dateTime, Users driver, RealmList<Users> usersJoined) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
         this.name = name;
         this.point = point;
         this.availablePlaces = availablePlaces;
         this.description = description;
-        this.meetHour = meetHour;
+        this.dateTime = dateTime;
         this.driver = driver;
         this.usersJoined = usersJoined;
     }
 
-    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String meetHour, Users driver) {
+    public Ride(RidesTypes ridesTypes, String name, RealmList<Double> point, int availablePlaces, String description, String dateTime, Users driver) {
         this.id = OnWindApp.RideId.incrementAndGet();
         this.ridesTypes = this.saveRideType(ridesTypes);
         this.name = name;
         this.point = point;
         this.availablePlaces = availablePlaces;
         this.description = description;
-        this.meetHour = meetHour;
+        this.dateTime = dateTime;
         this.driver = driver;
         this.usersJoined = new RealmList<Users>();
         this.isFinished = false;
+    }
+
+    // todo prueba
+    public Ride(String name) {
+        this.id = OnWindApp.RideId.incrementAndGet();
+        this.name = name;
+        this.ridesTypes = this.saveRideType(RidesTypes.Ida);
+        this.point = null;
+        this.description = "ddd";
     }
 
     @PrimaryKey
@@ -56,7 +65,7 @@ public class Ride extends RealmObject {
     @Required
     private String description;
 
-    private String meetHour;
+    private String dateTime;
 
     private Users driver;
 
@@ -124,12 +133,12 @@ public class Ride extends RealmObject {
         this.description = description;
     }
 
-    public String getMeetHour() {
-        return meetHour;
+    public String getDateTime() {
+        return dateTime;
     }
 
-    public void setMeetHour(String meetHour) {
-        this.meetHour = meetHour;
+    public void setDateTime(String dateTime) {
+        this.dateTime = dateTime;
     }
 
     public RealmList<Users> getUsersJoined() {
