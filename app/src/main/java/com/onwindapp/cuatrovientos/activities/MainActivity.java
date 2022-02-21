@@ -75,13 +75,6 @@ public class MainActivity extends AppCompatActivity {
             realm.commitTransaction();
         }*/
 
-        // TODO: 15/02/2022 temp
-        realm.executeTransaction(realm -> {
-            CommonData.currentUser = realm.where(Users.class)
-                    .equalTo("mail", "mpuerta@onwind.app")
-                    .findFirst();
-        });
-
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
