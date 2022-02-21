@@ -60,6 +60,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             realm = Realm.getDefaultInstance();
 
             realm.executeTransaction(realm -> rideToEdit = realm.where(Ride.class).equalTo("id", id).findFirst());
+            CommonData.editRide = new Ride();
             CommonData.editRide.setId(rideToEdit.getId());
             CommonData.editRide.setName(rideToEdit.getName());
             CommonData.editRide.setDescription(rideToEdit.getDescription());
