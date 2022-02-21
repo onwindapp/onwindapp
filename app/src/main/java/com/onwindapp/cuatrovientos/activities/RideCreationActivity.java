@@ -51,7 +51,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
         btnNext = (Button) findViewById(R.id.next);
         btnBack = (Button) findViewById(R.id.back);
-
+        // TODO: 21/02/2022 utiliza el bundel 
         Intent i = getIntent();
         String str = i.getStringExtra("id");
         int id = Integer.parseInt(str);

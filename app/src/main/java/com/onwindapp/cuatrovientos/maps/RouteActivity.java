@@ -76,6 +76,8 @@ public class RouteActivity extends AppCompatActivity {
                     ride.getUsersJoined().forEach(users -> users.setCO2points(newPoints));
                     realm.copyToRealmOrUpdate(ride);
                 });
+                Intent intent = new Intent(RouteActivity.this, MainActivity.class);
+                startActivity(intent);
             });
         }
 
