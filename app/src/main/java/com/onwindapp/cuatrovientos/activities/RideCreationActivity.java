@@ -86,6 +86,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                         realm.insertOrUpdate(CommonData.createRide);
                         realm.commitTransaction();
                         Toast.makeText(getApplicationContext(), "Viaje Creado",Toast.LENGTH_SHORT).show();
+                        finish();
                     } else {
                         realm = Realm.getDefaultInstance();
                         realm.beginTransaction();
@@ -102,6 +103,8 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                         realm.commitTransaction();
                         CommonData.editRide = null;
                         Toast.makeText(getApplicationContext(),"Viaje Editado",Toast.LENGTH_SHORT).show();
+                        CommonData.editMode =  Boolean.FALSE;
+                        finish();
                     }
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
