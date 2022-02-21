@@ -107,10 +107,22 @@ public class RideCreation1Fragment extends Fragment {
                         someEventListener.someEvent(null);
                         return;
                     }
-                    RealmList<Double> initCords = new RealmList<Double>();
-                    initCords.add(0.0);
-                    initCords.add(0.0);
-                    someEventListener.someEvent(new Ride(rideType, place.getText().toString(), initCords, availablePlaces, details.getText().toString(), date.getText().toString() + " " + time.getText().toString(), new Users()));
+                    if (CommonData.editMode == Boolean.FALSE){
+                        RealmList<Double> initCords = new RealmList<Double>();
+                        initCords.add(0.0);
+                        initCords.add(0.0);
+                        someEventListener.someEvent(new Ride(rideType, place.getText().toString(), initCords, availablePlaces, details.getText().toString(), date.getText().toString() + " " + time.getText().toString(), new Users()));
+                    } else{
+                        CommonData.editRide.setName(place.getText().toString());
+                        CommonData.editRide.setDescription(details.getText().toString());
+                        CommonData.editRide.setDateTime(date.getText().toString() + " " + time.getText().toString());
+                        CommonData.editRide.setAvailablePlaces(Integer.parseInt(seatsAvailable.getSelectedItem().toString()));
+                        if (type.isChecked()){
+                            CommonData.editRide.setRideType(RidesTypes.Vuelta);
+                        }
+                        someEventListener.someEvent(new Ride("edit"));
+                    }
+
                 } else {
                     someEventListener.someEvent(null);
                 }

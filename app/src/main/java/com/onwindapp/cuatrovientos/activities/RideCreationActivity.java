@@ -82,11 +82,14 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                         realm = Realm.getDefaultInstance();
                         CommonData.createRide.setDriver(CommonData.currentUser);
                         realm.beginTransaction();
-                        realm.copyToRealm(CommonData.createRide);
+                        realm.insertOrUpdate(CommonData.createRide);
                         realm.commitTransaction();
-                        Toast.makeText(getApplicationContext(), "Viaje creado",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Viaje Creado",Toast.LENGTH_SHORT).show();
                     } else {
                         realm = Realm.getDefaultInstance();
+                        realm.insertOrUpdate(CommonData.editRide);
+                        realm.commitTransaction();
+                        Toast.makeText(getApplicationContext(),"Viaje Editado",Toast.LENGTH_SHORT).show();
                     }
 
                     Intent intent = new Intent(getApplicationContext(), MainActivity.class);
