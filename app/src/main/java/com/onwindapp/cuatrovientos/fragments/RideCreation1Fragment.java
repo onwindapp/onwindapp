@@ -118,7 +118,9 @@ public class RideCreation1Fragment extends Fragment {
                         CommonData.editRide.setDateTime(date.getText().toString() + " " + time.getText().toString());
                         CommonData.editRide.setAvailablePlaces(Integer.parseInt(seatsAvailable.getSelectedItem().toString()));
                         if (type.isChecked()){
-                            CommonData.editRide.setRideType(RidesTypes.Vuelta);
+                            CommonData.editRide.setRideType(RidesTypes.Vuelta.toString());
+                        } else {
+                            CommonData.editRide.setRideType(RidesTypes.Ida.toString());
                         }
                         someEventListener.someEvent(new Ride("edit"));
                     }

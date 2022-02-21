@@ -49,8 +49,8 @@ public class Ride extends RealmObject {
         this.id = id;
     }
 
-    public void setRideType(RidesTypes ridesTypes) {
-        this.ridesTypes = this.saveRideType(ridesTypes);
+    public void setRideType(String ridesTypes) {
+        this.ridesTypes = ridesTypes;
     }
 
     public void setAvailablePlaces(int availablePlaces) {

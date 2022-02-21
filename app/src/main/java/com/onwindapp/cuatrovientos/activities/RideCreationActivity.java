@@ -21,6 +21,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
 import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
 import com.onwindapp.cuatrovientos.models.Ride;
+import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import io.realm.Realm;
@@ -63,7 +64,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             CommonData.editRide.setDateTime(rideToEdit.getDateTime());
             CommonData.editRide.setDriver(rideToEdit.getDriver());
             CommonData.editRide.setAvailablePlaces(rideToEdit.getAvailablePlaces());
-            CommonData.editRide.setRideType(rideToEdit.getRideType());
+            CommonData.editRide.setRideType(rideToEdit.getRideType().toString());
             CommonData.editRide.setUsersJoined(rideToEdit.getUsersJoined());
         }
 
@@ -87,8 +88,19 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                         Toast.makeText(getApplicationContext(), "Viaje Creado",Toast.LENGTH_SHORT).show();
                     } else {
                         realm = Realm.getDefaultInstance();
-                        realm.insertOrUpdate(CommonData.editRide);
+                        realm.beginTransaction();
+                        Ride tmpRide = realm.where(Ride.class).equalTo("id", CommonData.editRide.getId()).findFirst();
+                        if (tmpRide != null){
+                            tmpRide.setRideType(CommonData.editRide.getRideType().toString());
+                            tmpRide.setName(CommonData.editRide.getName());
+                            tmpRide.setDescription(CommonData.editRide.getDescription());
+                            tmpRide.setDateTime(CommonData.editRide.getDateTime());
+                            tmpRide.setAvailablePlaces(CommonData.editRide.getAvailablePlaces());
+                            tmpRide.setDriver(CommonData.editRide.getDriver());
+                            tmpRide.setUsersJoined(CommonData.editRide.getUsersJoined());
+                        }
                         realm.commitTransaction();
+                        CommonData.editRide = null;
                         Toast.makeText(getApplicationContext(),"Viaje Editado",Toast.LENGTH_SHORT).show();
                     }
 

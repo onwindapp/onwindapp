@@ -31,11 +31,22 @@ public class RideCreation3Fragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        txt3.setText(CommonData.createRide.getPoint().toString());
-        name.setText(CommonData.createRide.getName());
-        details.setText(CommonData.createRide.getDescription());
-        date.setText(CommonData.createRide.getDateTime());
-        seats.setText(Integer.toString(CommonData.createRide.getAvailablePlaces()));
-        type.setText(CommonData.createRide.getRideType().toString());
+        if (CommonData.editMode != Boolean.TRUE){
+            txt3.setText(CommonData.createRide.getPoint().toString());
+            name.setText(CommonData.createRide.getName());
+            details.setText(CommonData.createRide.getDescription());
+            date.setText(CommonData.createRide.getDateTime());
+            seats.setText(Integer.toString(CommonData.createRide.getAvailablePlaces()));
+            type.setText(CommonData.createRide.getRideType().toString());
+        } else {
+            txt3.setText(CommonData.editRide.getPoint().toString());
+            name.setText(CommonData.editRide.getName());
+            details.setText(CommonData.editRide.getDescription());
+            date.setText(CommonData.editRide.getDateTime());
+            seats.setText(Integer.toString(CommonData.editRide.getAvailablePlaces()));
+            type.setText(CommonData.editRide.getRideType().toString());
+        }
     }
+
+
 }
