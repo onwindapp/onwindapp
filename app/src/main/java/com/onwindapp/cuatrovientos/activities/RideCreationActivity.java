@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
 import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
+import com.onwindapp.cuatrovientos.fragments.RouteMapsFragment;
 import com.onwindapp.cuatrovientos.fragments.SelectionMapFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
