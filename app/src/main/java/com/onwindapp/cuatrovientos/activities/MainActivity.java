@@ -46,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         fabActions = (FloatingActionButton) findViewById(R.id.fabActions);
         realm = Realm.getDefaultInstance();
 
+
         // TODO: 15/02/2022 temp
 //        realm.executeTransaction(realm -> {
 //            CommonData.currentUser = realm.where(Users.class)
@@ -73,6 +74,13 @@ public class MainActivity extends AppCompatActivity {
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
         }*/
+
+        // TODO: 15/02/2022 temp
+        realm.executeTransaction(realm -> {
+            CommonData.currentUser = realm.where(Users.class)
+                    .equalTo("mail", "mpuerta@onwind.app")
+                    .findFirst();
+        });
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
@@ -110,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     fabActions.setImageDrawable(getDrawable(R.drawable.ic_add_svgrepo_com));
                     fabActions.setOnClickListener(v -> {
                         Intent intent = new Intent(MainActivity.this, RideCreationActivity.class);
+                        intent.putExtra("id", "-1");
                         startActivity(intent);
                     });
 

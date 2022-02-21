@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentManager;
 import androidx.viewpager2.widget.ViewPager2;
 
+import android.app.AlertDialog;
 import android.app.Fragment;
+import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.text.Html;
 import android.view.View;
@@ -18,7 +22,11 @@ import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
 import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
 import com.onwindapp.cuatrovientos.fragments.SelectionMapFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
+import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
+
+import io.realm.Realm;
+import io.realm.RealmResults;
 
 public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.onSomeEventListener {
     ViewPager2 pager;
@@ -29,9 +37,10 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     Button btnNext, btnBack;
     Boolean readyToConfirm = Boolean.FALSE;
     String markerInfo;
-    Ride tmpRide;
+    Ride tmpRide, rideToEdit;
     String data;
-    int nCurrentPage;
+    Realm realm;
+    int nCurrentPage, numb;
     SelectionMapFragment selectionMapFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,11 +51,31 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         btnNext = (Button) findViewById(R.id.next);
         btnBack = (Button) findViewById(R.id.back);
 
+        Intent i = getIntent();
+        String str = i.getStringExtra("id");
+        int id = Integer.parseInt(str);
+        if (id != -1){
+            CommonData.editMode = Boolean.TRUE;
+            realm = Realm.getDefaultInstance();
+
+            realm.executeTransaction(realm -> rideToEdit = realm.where(Ride.class).equalTo("id", id).findFirst());
+            CommonData.editRide.setId(rideToEdit.getId());
+            CommonData.editRide.setName(rideToEdit.getName());
+            CommonData.editRide.setDescription(rideToEdit.getDescription());
+            CommonData.editRide.setPoint(rideToEdit.getPoint());
+            CommonData.editRide.setDateTime(rideToEdit.getDateTime());
+            CommonData.editRide.setDriver(rideToEdit.getDriver());
+            CommonData.editRide.setAvailablePlaces(rideToEdit.getAvailablePlaces());
+            CommonData.editRide.setRideType(rideToEdit.getRideType().toString());
+            CommonData.editRide.setUsersJoined(rideToEdit.getUsersJoined());
+        }
+
         FragmentManager fm = getSupportFragmentManager();
         adapter = new RideCreationAdapter(fm, getLifecycle());
         pager.setAdapter(adapter);
         pager.setUserInputEnabled(false);
         addDotsIndicator(0);
+
 
         // TODO: 19/02/2022 send ride type to selection map
 
@@ -55,7 +84,36 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             public void onClick(View v) {
                 pager.setCurrentItem(nCurrentPage + 1);
                 if (readyToConfirm == Boolean.TRUE) {
-                    Toast.makeText(getApplicationContext(), "Confirmado",Toast.LENGTH_SHORT).show();
+                    if (CommonData.editMode == Boolean.FALSE){
+                        realm = Realm.getDefaultInstance();
+                        CommonData.createRide.setDriver(CommonData.currentUser);
+                        realm.beginTransaction();
+                        realm.insertOrUpdate(CommonData.createRide);
+                        realm.commitTransaction();
+                        Toast.makeText(getApplicationContext(), "Viaje Creado",Toast.LENGTH_SHORT).show();
+                        finish();
+                    } else {
+                        realm = Realm.getDefaultInstance();
+                        realm.beginTransaction();
+                        Ride tmpRide = realm.where(Ride.class).equalTo("id", CommonData.editRide.getId()).findFirst();
+                        if (tmpRide != null){
+                            tmpRide.setRideType(CommonData.editRide.getRideType().toString());
+                            tmpRide.setName(CommonData.editRide.getName());
+                            tmpRide.setDescription(CommonData.editRide.getDescription());
+                            tmpRide.setDateTime(CommonData.editRide.getDateTime());
+                            tmpRide.setAvailablePlaces(CommonData.editRide.getAvailablePlaces());
+                            tmpRide.setDriver(CommonData.editRide.getDriver());
+                            tmpRide.setUsersJoined(CommonData.editRide.getUsersJoined());
+                        }
+                        realm.commitTransaction();
+                        CommonData.editRide = null;
+                        Toast.makeText(getApplicationContext(),"Viaje Editado",Toast.LENGTH_SHORT).show();
+                        CommonData.editMode =  Boolean.FALSE;
+                        finish();
+                    }
+
+                    Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                    startActivity(intent);
                 }
                 if (btnNext.getText() == "Confirmar") readyToConfirm = Boolean.TRUE;
             }
@@ -120,12 +178,26 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     }
     @Override
     public void someEvent(Ride ride) {
-        this.tmpRide = ride;
+        CommonData.createRide = ride;
         if (ride == null){
             btnNext.setVisibility(View.INVISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
             CommonData.createRide = ride;
         }
+    }
+
+    public void hideNextButton(Boolean hide) {
+        if (hide){
+            btnNext.setVisibility(View.INVISIBLE);
+        } else {
+            btnNext.setVisibility(View.VISIBLE);
+        }
+    }
+
+    public void onDestroy() {
+        super.onDestroy();
+        CommonData.editMode =  Boolean.FALSE;
+        finish();
     }
 }
