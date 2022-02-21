@@ -118,6 +118,7 @@ public class MainActivity extends AppCompatActivity {
                     fabActions.setImageDrawable(getDrawable(R.drawable.ic_add_svgrepo_com));
                     fabActions.setOnClickListener(v -> {
                         Intent intent = new Intent(MainActivity.this, RideCreationActivity.class);
+                        intent.putExtra("id", "-1");
                         startActivity(intent);
                     });
 
