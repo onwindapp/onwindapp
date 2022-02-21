@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.RideCreationAdapter;
 import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
+import com.onwindapp.cuatrovientos.fragments.SelectionMapFragment;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
@@ -40,6 +41,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     String data;
     Realm realm;
     int nCurrentPage, numb;
+    SelectionMapFragment selectionMapFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -73,6 +75,9 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         pager.setAdapter(adapter);
         pager.setUserInputEnabled(false);
         addDotsIndicator(0);
+
+
+        // TODO: 19/02/2022 send ride type to selection map
 
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,6 +126,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                 readyToConfirm = Boolean.FALSE;
             }
         });
+
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -139,6 +145,11 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                     btnBack.setText("Atrás");
                     btnNext.setText("Confirmar");
                 } else {
+                    int pr = pager.getCurrentItem();
+                    // selection map
+//                    selectionMapFragment = (SelectionMapFragment) getSupportFragmentManager()
+//                            .findFragmentByTag("f" + pager.getCurrentItem());
+//                    selectionMapFragment.LoadData(tmpRide);
                     btnBack.setEnabled(true);
                     btnNext.setEnabled(true);
                     btnBack.setVisibility(View.VISIBLE);
@@ -172,6 +183,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             btnNext.setVisibility(View.INVISIBLE);
         } else {
             btnNext.setVisibility(View.VISIBLE);
+            CommonData.createRide = ride;
         }
     }
 
