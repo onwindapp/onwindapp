@@ -81,7 +81,7 @@ public class RouteActivity extends AppCompatActivity {
             });
         }
 
-        if (ride.getAvailablePlaces() < 1 || ride.getUsersJoined().contains(CommonData.currentUser) || ride.getFinished()) {
+        if (ride.getAvailablePlaces() < 1 || ride.getUsersJoined().contains(CommonData.currentUser) || ride.getFinished() || ride.getDriver().equals(CommonData.currentUser)) {
             btnUnirse.setEnabled(false);
         } else {
             btnUnirse.setOnClickListener(v -> realm.executeTransaction(realm -> {
