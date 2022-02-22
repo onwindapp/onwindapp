@@ -57,60 +57,63 @@
         app:layout_constraintTop_toTopOf="@+id/surname" />
 
     <TextView
-        android:id="@+id/textView9"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Teléfono:"
-        android:textColor="@color/ow_blue"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/phone"
-        app:layout_constraintEnd_toEndOf="@+id/textView3"
-        app:layout_constraintStart_toStartOf="@+id/textView3"
-        app:layout_constraintTop_toTopOf="@+id/phone" />
+            android:id="@+id/textView9"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Teléfono:"
+            android:textColor="@color/ow_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/phone"
+            app:layout_constraintTop_toTopOf="@+id/phone"
+            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginStart="56dp" />
 
     <TextView
-        android:id="@+id/textView3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Contraseña:"
-        android:textColor="@color/ow_blue"
-        android:textSize="16sp"
-        app:layout_constraintBottom_toBottomOf="@+id/password"
-        app:layout_constraintEnd_toEndOf="@+id/textView2"
-        app:layout_constraintStart_toStartOf="@+id/textView2"
-        app:layout_constraintTop_toTopOf="@+id/password" />
+            android:id="@+id/textView3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Contraseña:"
+            android:textColor="@color/ow_blue"
+            android:textSize="16sp"
+            app:layout_constraintBottom_toBottomOf="@+id/password"
+            app:layout_constraintEnd_toEndOf="@+id/textView2"
+            app:layout_constraintStart_toStartOf="@+id/textView2"
+            app:layout_constraintTop_toTopOf="@+id/password"
+            android:visibility="gone" />
 
     <EditText
-        android:id="@+id/email"
-        android:layout_width="220dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Correo"
-        android:inputType="textEmailAddress"
-        android:textColor="@color/ow_blue"
-        android:textSize="14sp"
-        app:layout_constraintEnd_toEndOf="@+id/surname"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/surname"
-        app:layout_constraintTop_toBottomOf="@+id/surname"
-        tools:ignore="SpeakableTextPresentCheck" />
+            android:id="@+id/email"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Correo"
+            android:inputType="textEmailAddress"
+            android:textColor="@color/ow_blue"
+            android:textSize="14sp"
+            app:layout_constraintEnd_toEndOf="@+id/surname"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/surname"
+            app:layout_constraintTop_toBottomOf="@+id/surname"
+            tools:ignore="SpeakableTextPresentCheck" />
 
     <EditText
-        android:id="@+id/password"
-        android:layout_width="220dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Contraseña"
-        android:inputType="textPassword"
-        android:textColor="@color/ow_blue"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="@+id/email"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/email"
-        app:layout_constraintTop_toBottomOf="@+id/email"
-        tools:ignore="SpeakableTextPresentCheck" />
+            android:id="@+id/password"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:layout_marginTop="20dp"
+            android:ems="10"
+            android:hint="Contraseña"
+            android:inputType="textPassword"
+            android:textColor="@color/ow_blue"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="@+id/email"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/email"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            tools:ignore="SpeakableTextPresentCheck"
+            android:enabled="false"
+            android:visibility="gone" />
 
     <Button
         android:id="@+id/edit"
@@ -123,18 +126,17 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <EditText
-        android:id="@+id/phone"
-        android:layout_width="220dp"
-        android:layout_height="48dp"
-        android:layout_marginTop="20dp"
-        android:ems="10"
-        android:hint="Teléfono"
-        android:inputType="phone"
-        android:textColor="@color/ow_blue"
-        app:layout_constraintEnd_toEndOf="@+id/password"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/password"
-        app:layout_constraintTop_toBottomOf="@+id/password" />
+            android:id="@+id/phone"
+            android:layout_width="220dp"
+            android:layout_height="48dp"
+            android:ems="10"
+            android:hint="Teléfono"
+            android:inputType="phone"
+            android:textColor="@color/ow_blue"
+            app:layout_constraintTop_toBottomOf="@+id/email"
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginEnd="20dp" />
 
     <EditText
         android:id="@+id/name"

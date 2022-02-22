@@ -26,7 +26,10 @@ import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
+import java.util.List;
+
 import io.realm.Realm;
+import io.realm.RealmList;
 import io.realm.RealmResults;
 
 public class RideCreationActivity extends AppCompatActivity implements RideCreation1Fragment.onSomeEventListener {
@@ -42,6 +45,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
     String data;
     Realm realm;
     int nCurrentPage, numb;
+    RealmList<Double> tempCords;
     SelectionMapFragment selectionMapFragment;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,13 +55,14 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
         mDotLayout = (LinearLayout) findViewById(R.id.dotsLayout);
         btnNext = (Button) findViewById(R.id.next);
         btnBack = (Button) findViewById(R.id.back);
+        realm = Realm.getDefaultInstance();
+
         // TODO: 21/02/2022 utiliza el bundel 
         Intent i = getIntent();
         String str = i.getStringExtra("id");
         int id = Integer.parseInt(str);
         if (id != -1){
             CommonData.editMode = Boolean.TRUE;
-            realm = Realm.getDefaultInstance();
 
             realm.executeTransaction(realm -> rideToEdit = realm.where(Ride.class).equalTo("id", id).findFirst());
             CommonData.editRide = new Ride();
@@ -65,6 +70,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
             CommonData.editRide.setName(rideToEdit.getName());
             CommonData.editRide.setDescription(rideToEdit.getDescription());
             CommonData.editRide.setPoint(rideToEdit.getPoint());
+            tempCords = rideToEdit.getPoint();
             CommonData.editRide.setDateTime(rideToEdit.getDateTime());
             CommonData.editRide.setDriver(rideToEdit.getDriver());
             CommonData.editRide.setAvailablePlaces(rideToEdit.getAvailablePlaces());
@@ -87,7 +93,6 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                 pager.setCurrentItem(nCurrentPage + 1);
                 if (readyToConfirm == Boolean.TRUE) {
                     if (CommonData.editMode == Boolean.FALSE){
-                        realm = Realm.getDefaultInstance();
                         CommonData.createRide.setDriver(CommonData.currentUser);
                         realm.beginTransaction();
                         realm.insertOrUpdate(CommonData.createRide);
@@ -95,20 +100,24 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                         Toast.makeText(getApplicationContext(), "Viaje Creado",Toast.LENGTH_SHORT).show();
                         finish();
                     } else {
-                        realm = Realm.getDefaultInstance();
-                        realm.beginTransaction();
-                        Ride tmpRide = realm.where(Ride.class).equalTo("id", CommonData.editRide.getId()).findFirst();
-                        if (tmpRide != null){
-                            tmpRide.setRideType(CommonData.editRide.getRideType().toString());
-                            tmpRide.setName(CommonData.editRide.getName());
-                            tmpRide.setDescription(CommonData.editRide.getDescription());
-                            tmpRide.setPoint(CommonData.editRide.getPoint());
-                            tmpRide.setDateTime(CommonData.editRide.getDateTime());
-                            tmpRide.setAvailablePlaces(CommonData.editRide.getAvailablePlaces());
-                            tmpRide.setDriver(CommonData.editRide.getDriver());
-                            tmpRide.setUsersJoined(CommonData.editRide.getUsersJoined());
-                        }
-                        realm.commitTransaction();
+
+                        realm.executeTransaction(realm1 -> {
+                            Ride tmpRide = realm.where(Ride.class).equalTo("id", CommonData.editRide.getId()).findFirst();
+//                            RealmList<Double> tempCord = CommonData.editRide.getPoint().size() == 0 ? tempCords : CommonData.editRide.getPoint();
+                            if (tmpRide != null){
+                                tmpRide.setRideType(CommonData.editRide.getRideType().toString());
+                                tmpRide.setName(CommonData.editRide.getName());
+                                tmpRide.setDescription(CommonData.editRide.getDescription());
+//                                tmpRide.setPoint(tempCord);
+                                tmpRide.setDateTime(CommonData.editRide.getDateTime());
+                                tmpRide.setAvailablePlaces(CommonData.editRide.getAvailablePlaces());
+                                tmpRide.setDriver(CommonData.editRide.getDriver());
+                                tmpRide.setUsersJoined(CommonData.editRide.getUsersJoined());
+                                realm.copyToRealmOrUpdate(tmpRide);
+                            }
+
+                        });
+
                         CommonData.editRide = null;
                         Toast.makeText(getApplicationContext(),"Viaje Editado",Toast.LENGTH_SHORT).show();
                         CommonData.editMode =  Boolean.FALSE;

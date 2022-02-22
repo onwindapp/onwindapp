@@ -35,7 +35,9 @@ public class SelectionMapFragment extends Fragment {
             // draggable marker
             mMap.addMarker(CommonData.editMode ?  new MarkerOptions().position(
                     new LatLng(CommonData.editRide.getPoint().get(0), CommonData.editRide.getPoint().get(1)))
-                            .draggable(true)
+                            .draggable(!CommonData.editMode)
+                    .title(CommonData.editRide.getRideType().equals(RidesTypes.Ida) ?
+                            "Destino" : "Salida")
                     :
                     CommonData.defaultMarker
                     .draggable(true)
