@@ -74,6 +74,7 @@ public class RouteActivity extends AppCompatActivity {
                     ride.finishRide();
                     float newPoints = (float) ((ride.getUsersJoined().size() + 1) * 5.3);
                     ride.getUsersJoined().forEach(users -> users.setCO2points(newPoints));
+                    ride.getDriver().setCO2points(newPoints);
                     realm.copyToRealmOrUpdate(ride);
                 });
                 Intent intent = new Intent(RouteActivity.this, MainActivity.class);
