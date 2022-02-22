@@ -71,7 +71,11 @@ public class SelectionMapFragment extends Fragment {
                     RealmList<Double> initCords = new RealmList<Double>();
                     initCords.add(marker.getPosition().latitude);
                     initCords.add(marker.getPosition().longitude);
-                    CommonData.createRide.setPoint(initCords);
+                    if (CommonData.editMode) {
+                        CommonData.editRide.setPoint(initCords);
+                    } else {
+                        CommonData.createRide.setPoint(initCords);
+                    }
                 }
 
                 @Override

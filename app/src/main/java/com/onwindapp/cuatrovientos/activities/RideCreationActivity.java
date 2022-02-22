@@ -102,6 +102,7 @@ public class RideCreationActivity extends AppCompatActivity implements RideCreat
                             tmpRide.setRideType(CommonData.editRide.getRideType().toString());
                             tmpRide.setName(CommonData.editRide.getName());
                             tmpRide.setDescription(CommonData.editRide.getDescription());
+                            tmpRide.setPoint(CommonData.editRide.getPoint());
                             tmpRide.setDateTime(CommonData.editRide.getDateTime());
                             tmpRide.setAvailablePlaces(CommonData.editRide.getAvailablePlaces());
                             tmpRide.setDriver(CommonData.editRide.getDriver());
