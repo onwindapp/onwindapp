@@ -39,7 +39,7 @@ public class RidesAvailableFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_rides_available, container, false);
 
         realm = Realm.getDefaultInstance();
-        realmRides = realm.where(Ride.class).findAll().stream().filter(ride -> ride.getAvailablePlaces() > 0).collect(Collectors.toList());
+        realmRides = realm.where(Ride.class).findAll().stream().filter(ride -> ride.getAvailablePlaces() > 0 && !ride.getFinished()).collect(Collectors.toList());
 
         RidesAdapter ridesAdapter = new RidesAdapter(getActivity(), realmRides);
         RecyclerView recyclerView = view.findViewById(R.id.tripsAvailableRecycler);
