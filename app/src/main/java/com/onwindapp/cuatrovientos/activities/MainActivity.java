@@ -31,7 +31,6 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
     Bundle bundle;
-    Users pruw;
     Realm realm;
     FloatingActionButton fabActions;
     Boolean realmCleanMode = false;

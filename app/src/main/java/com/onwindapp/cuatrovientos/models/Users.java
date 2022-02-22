@@ -12,7 +12,6 @@ import io.realm.annotations.PrimaryKey;
 import io.realm.annotations.Required;
 
 public class Users extends RealmObject {
-    private static final String clave = "1QqAaZz2WwSsXx3EeDdCc4RrFfVv5TtGgBb6YyHhNn7UuJjMm8IiKk9OoLl0PpÑñ";
     @PrimaryKey
     private int id;
     @Required
