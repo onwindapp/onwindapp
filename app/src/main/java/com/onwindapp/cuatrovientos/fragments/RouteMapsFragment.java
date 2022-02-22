@@ -26,6 +26,7 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.BitmapDescriptorFactory;
 import com.google.android.gms.maps.model.CameraPosition;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
@@ -72,8 +73,14 @@ public class RouteMapsFragment extends Fragment {
                     RealmList<Double> rd = ride.getPoint();
                     destination = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
                 }
-                mMap.addMarker(new MarkerOptions().position(origin).title("Inicio"));
-                mMap.addMarker(new MarkerOptions().position(destination).title("Destino"));
+                mMap.addMarker(new MarkerOptions().position(origin).title("Inicio").icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                        :
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
+                mMap.addMarker(new MarkerOptions().position(destination).title("Destino").icon((ride.getRideType().equals(RidesTypes.Ida) ?
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
+                        :
+                        BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED))));
 
                 mMap.moveCamera(CameraUpdateFactory.newLatLng(origin));
                 GoogleDirection.withServerKey(BuildConfig.Dir)
