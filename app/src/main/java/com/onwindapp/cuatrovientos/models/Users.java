@@ -2,6 +2,10 @@ package com.onwindapp.cuatrovientos.models;
 
 import com.onwindapp.cuatrovientos.app.OnWindApp;
 
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
@@ -24,17 +28,22 @@ public class Users extends RealmObject {
     private int nbans;
     private String forgivenessdate;
 
-    public Users() {}
+    public Users() {
+    }
+
+    public Users(String mail) {
+        this.mail = mail;
+    }
 
     public Users(String name, String surname, String password, String mail, String telephone) {
         this.id = OnWindApp.userId.incrementAndGet();
         this.name = name;
         this.surname = surname;
-        this.password = password;
+        this.password = this.encriptar(password);
         this.mail = mail;
         this.telephone = telephone;
         this.punctuation = 0;
-        this.CO2points = 0;
+        this.CO2points = 5;
         this.ban = false;
         this.nbans = 0;
         this.forgivenessdate = "";
@@ -101,7 +110,7 @@ public class Users extends RealmObject {
     }
 
     public void setCO2points(float CO2points) {
-        this.CO2points = CO2points;
+        this.CO2points += CO2points;
     }
 
     public boolean isBan() {
@@ -145,5 +154,25 @@ public class Users extends RealmObject {
     @Override
     public int hashCode() {
         return mail.hashCode();
+    }
+
+    private String encriptar(String plano){
+        String generatedPassword = null;
+        try {
+            MessageDigest md = MessageDigest.getInstance("SHA-512");
+            md.update("HolaSoyLaSalXD".getBytes(StandardCharsets.UTF_8));
+            byte[] bytes = md.digest(plano.getBytes(StandardCharsets.UTF_8));
+            StringBuilder sb = new StringBuilder();
+            for(int i=0; i< bytes.length ;i++){
+                sb.append(Integer.toString((bytes[i] & 0xff) + 0x100, 16).substring(1));
+            }
+            generatedPassword = sb.toString();
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+        return generatedPassword;
+    }
+    public boolean validacion(String intento){
+        return this.password.equals(this.encriptar(intento));
     }
 }

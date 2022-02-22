@@ -34,12 +34,14 @@ import com.onwindapp.cuatrovientos.BuildConfig;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
-public class MapsFragment extends Fragment {
+public class RouteMapsFragment extends Fragment {
     private GoogleMap mMap;
     private Ride ride;
     public void setData(Ride ride) {
@@ -48,25 +50,26 @@ public class MapsFragment extends Fragment {
     }
     private OnMapReadyCallback callback = new OnMapReadyCallback() {
 
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
             @Override
             public void onMapReady(GoogleMap googleMap) {
                 mMap = googleMap;
                 LatLng origin;
                 LatLng destination;
+
+                if (ride == null) {
+                    if (CommonData.editMode) {
+                        ride = CommonData.editRide;
+                    } else {
+                        ride = CommonData.createRide;
+                    }
+                }
+
                 if (ride.getRideType().equals(RidesTypes.Ida)) {
                     origin = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
-                    destination = new LatLng(42.824501, -1.659990);
+                    destination = CommonData.cuatrovientos;
                 } else {
-                    origin = new LatLng(42.824501, -1.659990);
+                    origin = CommonData.cuatrovientos;
+                    RealmList<Double> rd = ride.getPoint();
                     destination = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
                 }
                 mMap.addMarker(new MarkerOptions().position(origin).title("Inicio"));

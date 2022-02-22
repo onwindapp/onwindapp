@@ -8,14 +8,16 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.tabs.TabLayout;
 import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.adapters.FragmentAdapter;
 import com.onwindapp.cuatrovientos.maps.MainMapActivity;
-import com.onwindapp.cuatrovientos.maps.SelectionMapActivity;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 import com.onwindapp.cuatrovientos.utils.DummyDataGenerator;
 
 import io.realm.Realm;
@@ -28,20 +30,31 @@ public class MainActivity extends AppCompatActivity {
     RealmResults<Users> realmUsers;
     RealmResults<Ride> realmRides;
     DummyDataGenerator ddg;
+    Bundle bundle;
     Realm realm;
-    Boolean realmCleanMode = Boolean.TRUE;
-    String loggedUserEmail;
+    FloatingActionButton fabActions;
+    Boolean realmCleanMode = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         tablayout = findViewById(R.id.tab_layout);
         pager = findViewById(R.id.view_pager);
+        bundle = getIntent().getExtras();
         ddg = new DummyDataGenerator();
-
-        loggedUserEmail = "mpuerta@onwind.app";
-
+        fabActions = (FloatingActionButton) findViewById(R.id.fabActions);
         realm = Realm.getDefaultInstance();
+
+
+        // TODO: 15/02/2022 temp
+//        realm.executeTransaction(realm -> {
+//            CommonData.currentUser = realm.where(Users.class)
+//                    .equalTo("mail", "mpuerta@onwind.app")
+//                    .findFirst();
+//        });
+
+
+        // todo: refactor ralm transctions
         if (realmCleanMode){
             realm.beginTransaction();
             realm.deleteAll();
@@ -50,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
         realmUsers = realm.where(Users.class).findAll();
         realmRides = realm.where(Ride.class).findAll();
 
-        if (realmUsers.size() == 0){
+        /*if (realmUsers.size() == 0){
             realm.beginTransaction();
             realm.copyToRealm(ddg.createUsers());
             realm.commitTransaction();
@@ -59,7 +72,7 @@ public class MainActivity extends AppCompatActivity {
             realm.beginTransaction();
             realm.copyToRealm(ddg.createRides(this.realmUsers));
             realm.commitTransaction();
-        }
+        }*/
 
         FragmentManager fm = getSupportFragmentManager();
         adapter = new FragmentAdapter(fm, getLifecycle());
@@ -82,14 +95,37 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-//        Intent intent = new Intent(this, SelectionMapActivity.class);
-//
-//        startActivity(intent);
+        pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
+            @Override
+            public void onPageSelected(int position) {
+                super.onPageSelected(position);
+                if (position == 1) {
+                    fabActions.setImageDrawable(getDrawable(R.drawable.ic_map_svgrepo_com));
+                   fabActions.setOnClickListener(v -> {
+                       Intent intent = new Intent(MainActivity.this, MainMapActivity.class);
+                       startActivity(intent);
+                   });
+
+                } else {
+                    fabActions.setImageDrawable(getDrawable(R.drawable.ic_add_svgrepo_com));
+                    fabActions.setOnClickListener(v -> {
+                        Intent intent = new Intent(MainActivity.this, RideCreationActivity.class);
+                        intent.putExtra("id", "-1");
+                        startActivity(intent);
+                    });
+
+                }
+            }
+        });
+
+
+
 
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position){
                 tablayout.selectTab(tablayout.getTabAt(position));
+
             }
         });
     }
@@ -107,10 +143,17 @@ public class MainActivity extends AppCompatActivity {
             Intent intent = new Intent(this, RankingActivity.class);
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.EditarPerfil) {
+            Intent intent = new Intent(this, UserInfoActivity.class);
+            startActivity(intent);
+        }
+        if (item.getItemId() == R.id.Salir) {
+            Intent intent = new Intent(this, LoginActivity.class);
+            CommonData.currentUser = null;
+            startActivity(intent);
+        }
+
         return true;
     }
 
-    public String getLoggedUserId() {
-        return loggedUserEmail;
-    }
 }

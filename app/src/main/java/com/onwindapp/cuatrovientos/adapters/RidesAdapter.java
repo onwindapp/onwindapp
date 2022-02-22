@@ -27,13 +27,14 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHol
     }
 
     public static class TripsViewHolder extends RecyclerView.ViewHolder {
-        public TextView username, spacesAvailable, tripType;
+        public TextView username, spacesAvailable, tripType, dateTime;
 
         public TripsViewHolder(View itemView, final OnItemClickListener listener) {
             super(itemView);
             username = (TextView) itemView.findViewById(R.id.driverName);
             spacesAvailable = (TextView) itemView.findViewById(R.id.availableSpaces);
             tripType = (TextView) itemView.findViewById(R.id.tripType);
+            dateTime = (TextView) itemView.findViewById(R.id.txtDateTime);
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
@@ -64,10 +65,15 @@ public class RidesAdapter extends RecyclerView.Adapter<RidesAdapter.TripsViewHol
     @Override
     public void onBindViewHolder(TripsViewHolder holder, int position) {
         Ride currentRide = trips.get(position);
-
+//        if (currentRide.getAvailablePlaces() < 0) {
+//            holder.set
+//        }
         holder.username.setText(currentRide.getDescription());
         holder.spacesAvailable.setText(currentRide.getAvailablePlaces()+" Plazas");
         holder.tripType.setText(currentRide.getRideType().toString());
+
+//        String[] deteFormat = currentRide.getDateTime().split("")
+        holder.dateTime.setText(currentRide.getDateTime());
     }
 
     @Override

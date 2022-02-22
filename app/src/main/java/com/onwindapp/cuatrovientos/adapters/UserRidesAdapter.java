@@ -68,18 +68,10 @@ public class UserRidesAdapter extends RecyclerView.Adapter<UserRidesAdapter.User
         Ride currentRide = trips.get(position);
 
         holder.username.setText(currentRide.getDescription());
-        holder.date.setText(currentRide.getMeetHour());
+        holder.date.setText(currentRide.getDateTime());
         holder.tripType.setText(currentRide.getRideType().toString());
     }
 
-    private String getRandomDate(){
-        long time = System.currentTimeMillis();
-        Date dat = new Date(time);
-        GregorianCalendar gc = new GregorianCalendar();
-        gc.setTime(dat);
-        java.text.SimpleDateFormat format = new java.text.SimpleDateFormat("dd-MM-yyyy hh:mm");
-        return format.format(gc.getTime());
-    }
     @Override
     public int getItemCount() {
         return trips.size();
