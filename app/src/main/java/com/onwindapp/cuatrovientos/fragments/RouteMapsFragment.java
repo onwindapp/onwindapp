@@ -39,6 +39,7 @@ import com.onwindapp.cuatrovientos.utils.CommonData;
 import java.util.ArrayList;
 
 import io.realm.Realm;
+import io.realm.RealmList;
 
 public class RouteMapsFragment extends Fragment {
     private GoogleMap mMap;
@@ -68,6 +69,7 @@ public class RouteMapsFragment extends Fragment {
                     destination = CommonData.cuatrovientos;
                 } else {
                     origin = CommonData.cuatrovientos;
+                    RealmList<Double> rd = ride.getPoint();
                     destination = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
                 }
                 mMap.addMarker(new MarkerOptions().position(origin).title("Inicio"));
