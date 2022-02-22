@@ -7,11 +7,8 @@ import androidx.lifecycle.Lifecycle;
 import androidx.viewpager2.adapter.FragmentStateAdapter;
 
 import com.onwindapp.cuatrovientos.fragments.RideCreation1Fragment;
-import com.onwindapp.cuatrovientos.fragments.RideCreation2Fragment;
 import com.onwindapp.cuatrovientos.fragments.RideCreation3Fragment;
-import com.onwindapp.cuatrovientos.fragments.RidesAvailableFragment;
 import com.onwindapp.cuatrovientos.fragments.SelectionMapFragment;
-import com.onwindapp.cuatrovientos.fragments.UserRidesFragment;
 
 public class RideCreationAdapter extends FragmentStateAdapter {
     public RideCreationAdapter(@NonNull FragmentManager fragmentManager, @NonNull Lifecycle lifecycle) {

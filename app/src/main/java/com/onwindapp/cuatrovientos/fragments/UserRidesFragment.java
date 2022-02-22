@@ -30,7 +30,7 @@ import io.realm.Realm;
 import io.realm.RealmResults;
 
 public class UserRidesFragment extends Fragment {
-    List<Ride> userRides;
+    List<Ride> userRides, ownedRides;
     RealmResults<Ride> rides;
     Realm realm;
     Users loggedUser;
@@ -47,7 +47,11 @@ public class UserRidesFragment extends Fragment {
 //        loggedUser = realm.where(Users.class).equalTo("mail", loggedUserEmail).findFirst();
         rides = realm.where(Ride.class).findAll();
 
-        if (CommonData.currentUser != null) userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(CommonData.currentUser)).collect(Collectors.toList());
+        if (CommonData.currentUser != null){
+            userRides = rides.stream().filter(ride -> ride.getUsersJoined().contains(CommonData.currentUser)).collect(Collectors.toList());
+            ownedRides = rides.stream().filter(ride -> ride.getDriver().getMail().equals(CommonData.currentUser.getMail())).collect(Collectors.toList());
+            userRides.addAll(ownedRides);
+        }
 
         if (userRides != null){
             UserRidesAdapter userRidesAdapter = new UserRidesAdapter(getActivity(), userRides);
@@ -66,6 +70,7 @@ public class UserRidesFragment extends Fragment {
                 }
             });
         }
+
 
         return view;
     }

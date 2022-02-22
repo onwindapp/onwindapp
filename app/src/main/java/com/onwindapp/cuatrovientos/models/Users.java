@@ -43,7 +43,7 @@ public class Users extends RealmObject {
         this.mail = mail;
         this.telephone = telephone;
         this.punctuation = 0;
-        this.CO2points = 0;
+        this.CO2points = 5;
         this.ban = false;
         this.nbans = 0;
         this.forgivenessdate = "";

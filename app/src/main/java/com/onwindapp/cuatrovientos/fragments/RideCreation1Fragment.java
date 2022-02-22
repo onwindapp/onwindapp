@@ -17,6 +17,7 @@ import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.CheckBox;
 import android.widget.DatePicker;
@@ -31,6 +32,7 @@ import com.onwindapp.cuatrovientos.R;
 import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.models.Users;
+import com.onwindapp.cuatrovientos.utils.CommonData;
 
 import java.security.PrivateKey;
 import java.text.SimpleDateFormat;
@@ -44,17 +46,21 @@ public class RideCreation1Fragment extends Fragment {
     private Ride ride;
     private CheckBox chkAccept;
     EditText date, time, place, details;
-    TextView cPlace, cDetails, cDate, cTime, globalErrorNote;
+    TextView cPlace, cDetails, cDate, cTime, globalErrorNote, title;
     Switch type;
+    ArrayAdapter<String> seatsAvailableAdapter;
+    Spinner seatsAvailable;
+    Boolean dataLoaded = Boolean.FALSE;
     public RideCreation1Fragment() { }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ride_creation1, container, false);
-        Spinner seatsAvailable = (Spinner) view.findViewById(R.id.seatsAvailable);
+        seatsAvailable = (Spinner) view.findViewById(R.id.seatsAvailable);
         time = (EditText) view.findViewById(R.id.timeSelector);
         date = (EditText) view.findViewById(R.id.dateselector);
         place = (EditText) view.findViewById(R.id.place);
+        title = (TextView) view.findViewById(R.id.title);
         cPlace = (TextView) view.findViewById(R.id.checkPlace);
         cDetails = (TextView) view.findViewById(R.id.checkDetails);
         cDate = (TextView) view.findViewById(R.id.checkDate);
@@ -65,6 +71,9 @@ public class RideCreation1Fragment extends Fragment {
         type = (Switch) view.findViewById(R.id.type);
         date.setInputType(InputType.TYPE_NULL);
         time.setInputType(InputType.TYPE_NULL);
+
+
+
 
         chkAccept.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -98,12 +107,36 @@ public class RideCreation1Fragment extends Fragment {
                         someEventListener.someEvent(null);
                         return;
                     }
-                    RealmList<Double> initCords = new RealmList<Double>();
-                    initCords.add(0.0);
-                    initCords.add(0.0);
-                    someEventListener.someEvent(new Ride(rideType, place.getText().toString(), initCords, availablePlaces, details.getText().toString(), date.getText().toString() + " " + time.getText().toString(), new Users()));
+                    if (CommonData.editMode == Boolean.FALSE){
+                        RealmList<Double> initCords = new RealmList<Double>();
+                        initCords.add(0.0);
+                        initCords.add(0.0);
+                        someEventListener.someEvent(new Ride(rideType, place.getText().toString(), initCords, availablePlaces, details.getText().toString(), date.getText().toString() + " " + time.getText().toString(), new Users()));
+                    } else{
+                        CommonData.editRide.setName(place.getText().toString());
+                        CommonData.editRide.setDescription(details.getText().toString());
+                        CommonData.editRide.setDateTime(date.getText().toString() + " " + time.getText().toString());
+                        CommonData.editRide.setAvailablePlaces(Integer.parseInt(seatsAvailable.getSelectedItem().toString()));
+                        if (type.isChecked()){
+                            CommonData.editRide.setRideType(RidesTypes.Vuelta.toString());
+                        } else {
+                            CommonData.editRide.setRideType(RidesTypes.Ida.toString());
+                        }
+                        someEventListener.someEvent(new Ride("edit"));
+                    }
+
                 } else {
                     someEventListener.someEvent(null);
+                }
+            }
+        });
+
+        type.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
                 }
             }
         });
@@ -116,6 +149,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cPlace.setVisibility(View.INVISIBLE);
                 if (cDetails.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -134,6 +171,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cDetails.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -152,6 +193,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cDate.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDetails.getVisibility() == View.INVISIBLE && cTime.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -170,6 +215,10 @@ public class RideCreation1Fragment extends Fragment {
 
             @Override
             public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
                 cTime.setVisibility(View.INVISIBLE);
                 if (cPlace.getVisibility() == View.INVISIBLE && cDetails.getVisibility() == View.INVISIBLE && cDate.getVisibility() == View.INVISIBLE ) globalErrorNote.setVisibility(View.INVISIBLE);
             }
@@ -193,11 +242,12 @@ public class RideCreation1Fragment extends Fragment {
                 showDateDialog(date);
             }
         });
-        ArrayAdapter<String> seatsAvailableAdapter = new ArrayAdapter<String>(getActivity(),
+        seatsAvailableAdapter = new ArrayAdapter<String>(getActivity(),
                 android.R.layout.simple_expandable_list_item_1, getResources().getStringArray(R.array.seats));
         seatsAvailableAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         seatsAvailableAdapter.notifyDataSetChanged();
         seatsAvailable.setAdapter(seatsAvailableAdapter);
+
 
         return view;
     }
@@ -237,6 +287,7 @@ public class RideCreation1Fragment extends Fragment {
 
     public interface onSomeEventListener {
         public void someEvent(Ride ride);
+        public void hideNextButton(Boolean hide);
     }
 
     onSomeEventListener someEventListener;
@@ -250,4 +301,34 @@ public class RideCreation1Fragment extends Fragment {
             throw new ClassCastException(activity.toString() + " must implement onSomeEventListener");
         }
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        seatsAvailable.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parentView, View selectedItemView, int position, long id) {
+                if (chkAccept.isChecked()){
+                    someEventListener.hideNextButton(Boolean.TRUE);
+                    chkAccept.toggle();
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parentView) {}
+        });
+        if (CommonData.editMode == Boolean.TRUE && dataLoaded == Boolean.FALSE){
+            title.setText("Editar Viaje");
+            place.setText(CommonData.editRide.getName());
+            details.setText(CommonData.editRide.getDescription());
+            String[]dateTime = CommonData.editRide.getDateTime().split(" ");
+            date.setText(dateTime[0]);
+            time.setText(dateTime[1]);
+            seatsAvailable.setSelection(CommonData.editRide.getAvailablePlaces() - 1);
+            if (CommonData.editRide.getRideType().toString().equals("Vuelta")) type.toggle();
+            dataLoaded = Boolean.TRUE;
+        }
+    }
+
+
 }

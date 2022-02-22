@@ -23,6 +23,8 @@ import com.onwindapp.cuatrovientos.models.Ride;
 import com.onwindapp.cuatrovientos.models.RidesTypes;
 import com.onwindapp.cuatrovientos.utils.CommonData;
 
+import io.realm.RealmList;
+
 public class SelectionMapFragment extends Fragment {
     private GoogleMap mMap;
     private Ride ride;
@@ -31,7 +33,11 @@ public class SelectionMapFragment extends Fragment {
         public void onMapReady(GoogleMap googleMap) {
             mMap = googleMap;
             // draggable marker
-            mMap.addMarker(CommonData.defaultMarker
+            mMap.addMarker(CommonData.editMode ?  new MarkerOptions().position(
+                    new LatLng(CommonData.editRide.getPoint().get(0), CommonData.editRide.getPoint().get(1)))
+                            .draggable(true)
+                    :
+                    CommonData.defaultMarker
                     .draggable(true)
                     .icon((ride.getRideType().equals(RidesTypes.Ida) ?
                     BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_ORANGE)
@@ -48,7 +54,6 @@ public class SelectionMapFragment extends Fragment {
                             "Destino" : "Salida")
             );
 
-
             CameraPosition cameraPosition = new CameraPosition.Builder()
                     .target(CommonData.defaultLoc)
                     .zoom(11)
@@ -63,7 +68,10 @@ public class SelectionMapFragment extends Fragment {
 
                 @Override
                 public void onMarkerDragEnd(@NonNull Marker marker) {
-                    CommonData.selectedPosition = marker.getPosition();
+                    RealmList<Double> initCords = new RealmList<Double>();
+                    initCords.add(marker.getPosition().latitude);
+                    initCords.add(marker.getPosition().longitude);
+                    CommonData.createRide.setPoint(initCords);
                 }
 
                 @Override

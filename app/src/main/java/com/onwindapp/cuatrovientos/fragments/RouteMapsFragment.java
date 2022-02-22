@@ -54,6 +54,15 @@ public class RouteMapsFragment extends Fragment {
                 mMap = googleMap;
                 LatLng origin;
                 LatLng destination;
+
+                if (ride == null) {
+                    if (CommonData.editMode) {
+                        ride = CommonData.editRide;
+                    } else {
+                        ride = CommonData.createRide;
+                    }
+                }
+
                 if (ride.getRideType().equals(RidesTypes.Ida)) {
                     origin = new LatLng(ride.getPoint().get(0), ride.getPoint().get(1));
                     destination = CommonData.cuatrovientos;
